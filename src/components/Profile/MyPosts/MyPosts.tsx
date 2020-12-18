@@ -6,23 +6,24 @@ export type MessageType = {
     message: string
 }
 
-
 const MyPosts = () => {
-  return (
-    <div>
-      My posts
-      <div>
-        <textarea></textarea>
-        <button>Add post</button>
-
-      </div>
-      <div className={s.posts}>
-        <Post message = 'Hey one'/>
-        <Post message = 'Message two'/>
-      </div>
-    </div>
-  )
-
+    return (
+        <div className={s.postsBlock}>
+           <h3> My posts</h3>
+            <div>
+                <div className='textArea'>
+                    <textarea></textarea>
+                </div>
+                <div className='button'>
+                    <button>Add post</button>
+                </div>
+            </div>
+            <div className={s.posts}>
+                <Post message='Hey one'/>
+                <Post message='Message two'/>
+            </div>
+        </div>
+    )
 }
 
 export default MyPosts;
