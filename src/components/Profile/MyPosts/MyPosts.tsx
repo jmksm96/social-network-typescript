@@ -9,10 +9,15 @@ export type MessageType = {
 
 const MyPosts = () => {
 
-    let postsData = [
+    let posts = [
         {id: 1, message: 'Hey one', likesCount: 1},
         {id: 2, message: 'Message two', likesCount: 12},
+        {id: 2, message: 'Message three', likesCount: 5},
+        {id: 2, message: 'Message four', likesCount: 10},
     ]
+
+    let postsElements = posts.map(p => <Post message={p.message} likesCount = {p.likesCount}/>)
+
     return (
         <div className={s.postsBlock}>
            <h3> My posts</h3>
@@ -25,11 +30,12 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={postsData[0].message} likesCount = {postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount = {postsData[0].likesCount}/>
+                {postsElements}
             </div>
         </div>
     )
 }
 
 export default MyPosts;
+
+
