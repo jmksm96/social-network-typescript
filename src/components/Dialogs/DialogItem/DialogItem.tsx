@@ -1,7 +1,8 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import {DialogsType} from "../../../redux/state";
+import { DialogsType } from "../../../Typing/typing";
+
 
 const DialogItem: React.FC<DialogsType> = (props) => {
 

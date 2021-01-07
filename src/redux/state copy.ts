@@ -1,4 +1,33 @@
-import { stateType } from "../Typing/typing";
+export type MessagesType = {
+  id: number;
+  message: string;
+};
+export type DialogsType = {
+  id: number;
+  name: string;
+};
+export type PostsType = {
+  id: number;
+  message: string;
+  likesCount: number;
+};
+export type ProfilePageType = {
+  posts: Array<PostsType>;
+};
+export type DialogPageType = {
+  dialogs: Array<DialogsType>;
+  messages: Array<MessagesType>;
+};
+export type RootStateType = {
+  profilePage: ProfilePageType;
+  dialogsPage: DialogPageType;
+  addPost: (postMessage: string) => void
+};
+
+export type stateType = {
+  profilePage: ProfilePageType;
+  dialogsPage: DialogPageType;
+}
 
 let state: stateType = {
   profilePage: {
@@ -28,10 +57,10 @@ let state: stateType = {
     ],
   },
 };
-export const addPost = (postMessage: string ) => {
+export const addPost = (postMessage: string) => {
   let newPost = {
     id: 5,
-    message: postMessage ,
+    message: postMessage,
     likesCount: 0,
   };
   state.profilePage.posts.push(newPost);
