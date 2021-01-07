@@ -10,7 +10,6 @@ const Dialogs:React.FC<stateType> = (props) => {
 
     let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
-
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessage = () => {

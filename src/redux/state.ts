@@ -1,3 +1,4 @@
+import { rerenderEntireTree } from './../render';
 import { stateType } from "../Typing/typing";
 
 let state: stateType = {
@@ -35,6 +36,7 @@ export const addPost = (postMessage: string ) => {
     likesCount: 0,
   };
   state.profilePage.posts.push(newPost);
+  rerenderEntireTree(state)
 };
 
 export default state;

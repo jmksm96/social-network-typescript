@@ -5,18 +5,20 @@ import Post from './Post/Post';
 
 type MyPostsType = {
     posts: Array<PostsType>;
-    addPost: (postMessage: string ) => void
+    addPost: (postMessage: string) => void
 
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
+
         if (newPostElement.current) {
             props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
     }
 
@@ -28,7 +30,7 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div className='button'>
-                    <button onClick={() => addPost}>Add post</button>
+                    <button onClick={() => addPost()}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
