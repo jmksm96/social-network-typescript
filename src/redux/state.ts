@@ -1,8 +1,9 @@
-import { rerenderEntireTree } from './../render';
+import { rerenderEntireTree } from "./../render";
 import { stateType } from "../Typing/typing";
 
 let state: stateType = {
   profilePage: {
+    newPostText: "",
     posts: [
       { id: 1, message: "Hey one", likesCount: 1 },
       { id: 2, message: "Message two", likesCount: 12 },
@@ -29,14 +30,19 @@ let state: stateType = {
     ],
   },
 };
-export const addPost = (postMessage: string ) => {
+export const addPost = () => {
   let newPost = {
     id: 5,
-    message: postMessage ,
+    message: state.profilePage.newPostText,
     likesCount: 0,
   };
   state.profilePage.posts.push(newPost);
-  rerenderEntireTree(state)
+  state.profilePage.newPostText = '';
+  rerenderEntireTree(state);
+};
+export const updateNewPostText = (newPostText: string) => {
+  state.profilePage.newPostText = newPostText;
+  rerenderEntireTree(state);
 };
 
 export default state;

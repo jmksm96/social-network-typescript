@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Header from "./components/Header/Header";
 import Music from './components/Music/Music';
@@ -15,14 +15,17 @@ const App: React.FC<stateType> = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
+                <Header />
+                <Navbar />
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.dialogsPage} profilePage={props.profilePage}/>}/>
-                    <Route path='/profile' render={() => <Profile posts={props.profilePage.posts} />}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.dialogsPage}
+                        profilePage={props.profilePage} />} />
+                    <Route path='/profile' render={() => <Profile posts={props.profilePage.posts}
+                        newPostText={props.profilePage.newPostText}
+                    />} />
+                    <Route path='/news' render={() => <News />} />
+                    <Route path='/music' render={() => <Music />} />
+                    <Route path='/settings' render={() => <Settings />} />
                 </div>
             </div>
         </BrowserRouter>

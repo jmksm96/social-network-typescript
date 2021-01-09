@@ -8,6 +8,7 @@ import { stateType } from './Typing/typing';
 
 
 
+
 export let rerenderEntireTree = (state: stateType) => {
     ReactDOM.render(
         <React.StrictMode>
