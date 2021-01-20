@@ -1,11 +1,11 @@
 import React from 'react';
-import {PostsType, StoreType} from '../../../Typing/typing';
+import {AddPostActionType, PostsType, StoreType, UpdateNewPostTextActionType} from '../../../Typing/typing';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 type MyPostsType = {
     store: StoreType
-
+    dispatch: (action: AddPostActionType| UpdateNewPostTextActionType) => void
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -14,15 +14,15 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
+
         if (newPostElement.current) {
-            props.store.addPost(newPostElement.current.value)
+            props.dispatch({type:"ADD-POST", newPostText: newPostElement.current.value })
         }
     }
 
     let onPostChange = () => {
-        debugger
         if (newPostElement.current) {
-            props.store.updateNewPostText(newPostElement.current.value)
+            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newPostText: newPostElement.current?.value})
         }
 
     }

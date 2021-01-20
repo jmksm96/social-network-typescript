@@ -8,12 +8,13 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {StoreType} from './Typing/typing';
+import {AddPostActionType, StoreType, UpdateNewPostTextActionType} from './Typing/typing';
 
 type PropsType = {
     store: StoreType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newPostText: string) => void
+    // addPost: (postMessage: string) => void
+    // updateNewPostText: (newPostText: string) => void
+    dispatch: (action: AddPostActionType| UpdateNewPostTextActionType) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -25,7 +26,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <Dialogs state={state}/>}/>
-                    <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                    <Route path='/profile' render={() => <Profile store={props.store} dispatch = {props.dispatch}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
