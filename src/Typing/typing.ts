@@ -29,4 +29,14 @@ export type MessagesType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
   }
-  
+
+
+
+  export type StoreType = {
+    _state: stateType
+    updateNewPostText: (newPostText: string) => void
+    addPost: (postMessage: string) => void
+    _callSubscriber: (state: stateType) => void
+    subscribe: (observer: (state: stateType) => void) => void
+    getState: () => stateType
+  }

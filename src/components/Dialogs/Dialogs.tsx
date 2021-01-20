@@ -4,12 +4,14 @@ import DialogItem from "./DialogItem/DialogItem";
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 
+type PropsType = {
+    state: stateType
+}
 
+const Dialogs:React.FC<PropsType> = (props) => {
 
-const Dialogs:React.FC<stateType> = (props) => {
-
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = props.state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElements = props.state.dialogsPage.messages.map(m => <Message message={m.message} id={m.id}/>)
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessage = () => {

@@ -1,17 +1,20 @@
 import React from 'react'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { addPost, updateNewPostText } from '../../redux/state';
 import MyPosts from './MyPosts/MyPosts';
-import { ProfilePageType } from '../../Typing/typing';
+import { StoreType} from '../../Typing/typing';
 
-const Profile: React.FC<ProfilePageType> = (props) => {
+
+type PropsType = {
+
+    store: StoreType
+
+}
+
+const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
-            <ProfileInfo />
-            <MyPosts posts={props.posts}
-                addPost={addPost}
-                newPostText={props.newPostText}
-                updateNewPostText={updateNewPostText} />
+            <ProfileInfo/>
+            <MyPosts store={props.store}/>
         </div>
     )
 }
