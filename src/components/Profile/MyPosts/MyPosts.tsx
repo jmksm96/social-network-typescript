@@ -1,11 +1,13 @@
 import React from 'react';
-import {AddPostActionType, PostsType, StoreType, UpdateNewPostTextActionType} from '../../../Typing/typing';
+import { StoreType, ActionsTypes} from '../../../Typing/typing';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {addPostAC, updateNewPostTextAC} from "../../../redux/state";
 
 type MyPostsType = {
     store: StoreType
-    dispatch: (action: AddPostActionType| UpdateNewPostTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
+
 }
 
 const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -14,15 +16,14 @@ const MyPosts: React.FC<MyPostsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
-
         if (newPostElement.current) {
-            props.dispatch({type:"ADD-POST", newPostText: newPostElement.current.value })
+            props.dispatch(addPostAC(newPostElement.current.value))
         }
     }
 
     let onPostChange = () => {
         if (newPostElement.current) {
-            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newPostText: newPostElement.current?.value})
+            props.dispatch(updateNewPostTextAC(newPostElement.current.value))
         }
 
     }

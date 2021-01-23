@@ -8,13 +8,12 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {AddPostActionType, StoreType, UpdateNewPostTextActionType} from './Typing/typing';
+import {ActionsTypes, StoreType} from './Typing/typing';
 
 type PropsType = {
     store: StoreType
-    // addPost: (postMessage: string) => void
-    // updateNewPostText: (newPostText: string) => void
-    dispatch: (action: AddPostActionType| UpdateNewPostTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
+    // addPostAC: (action: ActionsTypes) => void
 }
 
 const App: React.FC<PropsType> = (props) => {

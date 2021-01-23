@@ -1,5 +1,17 @@
 import {StoreType} from "../Typing/typing";
 
+export const addPostAC = (NewPostText: string) => {
+    return {
+        type: "ADD-POST",
+        newPostText: NewPostText
+    } as const
+}
+export const updateNewPostTextAC = (NewPostText: string) => {
+    return {
+        type:"UPDATE-NEW-POST-TEXT",
+        newPostText: NewPostText
+    } as const
+}
 
 
 const store: StoreType = {
@@ -41,25 +53,11 @@ const store: StoreType = {
     _callSubscriber() {
         console.log('state is changed');
     },
-    // addPost(postMessage: string) {
-    //     let newPost = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     };
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewPostText(newPostText: string) {
-    //     this._state.profilePage.newPostText = newPostText;
-    //     this._callSubscriber(this._state);
-    // },
+
     dispatch(action) {
         if (action.type === "ADD-POST") {
             let newPost = {
                 id: 5,
-                // message: this._state.profilePage.newPostText,
                 message: action.newPostText,
                 likesCount: 0
             };
