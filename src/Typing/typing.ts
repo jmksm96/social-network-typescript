@@ -1,4 +1,4 @@
-import {addPostAC, updateNewPostTextAC} from "../redux/state";
+import {addMessageAC, addPostAC, updateNewMessageTextAC, updateNewPostTextAC} from "../redux/state";
 
 export type MessagesType = {
     id: number
@@ -20,26 +20,15 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageText: string
 };
-// export type RootStateType = {
-//   rootType: stateType
-//   addPost: (postMessage: string) => void
-//   updateNewPostText: (newPostText: string ) => void
-// };
 export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
-// export type AddPostActionType = {
-//     type: "ADD-POST"
-//     newPostText: string
-// }
-// export type UpdateNewPostTextActionType = {
-//     type: "UPDATE-NEW-POST-TEXT"
-//     newPostText: string
-// }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+                         | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
 export type StoreType = {
     _state: stateType
     // updateNewPostText: (newPostText: string) => void

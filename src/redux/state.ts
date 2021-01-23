@@ -12,6 +12,18 @@ export const updateNewPostTextAC = (NewPostText: string) => {
         newPostText: NewPostText
     } as const
 }
+export const addMessageAC = (NewMessageText: string) => {
+    return {
+        type: "ADD-MESSAGE",
+        newMessageText: NewMessageText
+    } as const
+}
+export const updateNewMessageTextAC = (NewMessageText: string) => {
+    return {
+        type:"UPDATE-NEW-MESSAGE",
+        newMessageText: NewMessageText
+    } as const
+}
 
 
 const store: StoreType = {
@@ -42,6 +54,7 @@ const store: StoreType = {
                 {id: 5, message: "Javascript"},
                 {id: 6, message: "Vue.js"},
             ],
+            newMessageText: "",
         },
     },
     getState() {
@@ -66,6 +79,17 @@ const store: StoreType = {
             this._callSubscriber(this._state);
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newPostText;
+            this._callSubscriber(this._state);
+        } else if (action.type === "ADD-MESSAGE") {
+            let newMessage = {
+                id: 6,
+                message: action.newMessageText
+            };
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state)
+        } else if (action.type === "UPDATE-NEW-MESSAGE") {
+            this._state.dialogsPage.newMessageText = action.newMessageText
             this._callSubscriber(this._state);
         }
     }

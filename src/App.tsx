@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 import Header from "./components/Header/Header";
@@ -13,7 +13,6 @@ import {ActionsTypes, StoreType} from './Typing/typing';
 type PropsType = {
     store: StoreType
     dispatch: (action: ActionsTypes) => void
-    // addPostAC: (action: ActionsTypes) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -24,7 +23,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs state={state}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={state} dispatch = {props.dispatch} store = {props.store}/>}/>
                     <Route path='/profile' render={() => <Profile store={props.store} dispatch = {props.dispatch}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
