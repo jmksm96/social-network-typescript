@@ -1,4 +1,7 @@
 import {StoreType} from "../Typing/typing";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+
 
 export const addPostAC = (NewPostText: string) => {
     return {
@@ -68,30 +71,10 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost = {
-                id: 5,
-                message: action.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newPostText;
-            this._callSubscriber(this._state);
-        } else if (action.type === "ADD-MESSAGE") {
-            let newMessage = {
-                id: 6,
-                message: action.newMessageText
-            };
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state)
-        } else if (action.type === "UPDATE-NEW-MESSAGE") {
-            this._state.dialogsPage.newMessageText = action.newMessageText
-            this._callSubscriber(this._state);
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber(this._state)
     }
 
 }
