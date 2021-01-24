@@ -1,15 +1,17 @@
-import {ActionsTypes, MessagesType, PostsType, ProfilePageType, stateType} from "../Typing/typing";
+import {ActionsTypes, ProfilePageType} from "../Typing/typing";
 
-export type ProfileReducerType = {
-    state: stateType
-    action: ActionsTypes
-    messages: Array<MessagesType>
-    posts: Array<PostsType>
+let initialState = {
+        posts: [
+            {id: 1, message: "Message one", likesCount: 1},
+            {id: 2, message: "Message two", likesCount: 12},
+            {id: 3, message: "Message three", likesCount: 5},
+            {id: 4, message: "Message four", likesCount: 10},
+        ],
+        newPostText: "",
+    }
 
 
-}
-
-const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     if (action.type === "ADD-POST") {
         let newPost = {
             id: 5,
