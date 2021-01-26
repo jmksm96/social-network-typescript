@@ -3,27 +3,25 @@ import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 
 
-export const addPostAC = (NewPostText: string) => {
+export const addPostAC = () => {
     return {
-        type: "ADD-POST",
-        newPostText: NewPostText
+        type: "ADD-POST"
     } as const
 }
 export const updateNewPostTextAC = (NewPostText: string) => {
     return {
-        type:"UPDATE-NEW-POST-TEXT",
+        type: "UPDATE-NEW-POST-TEXT",
         newPostText: NewPostText
     } as const
 }
-export const addMessageAC = (NewMessageText: string) => {
+export const addMessageAC = () => {
     return {
-        type: "ADD-MESSAGE",
-        newMessageText: NewMessageText
+        type: "ADD-MESSAGE"
     } as const
 }
 export const updateNewMessageTextAC = (NewMessageText: string) => {
     return {
-        type:"UPDATE-NEW-MESSAGE",
+        type: "UPDATE-NEW-MESSAGE",
         newMessageText: NewMessageText
     } as const
 }

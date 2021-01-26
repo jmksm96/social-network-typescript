@@ -1,48 +1,45 @@
 import React from 'react';
-import { StoreType, ActionsTypes} from '../../../Typing/typing';
 import s from './MyPosts.module.css';
-import Post from './Post/Post';
-import {addPostAC, updateNewPostTextAC} from "../../../redux/state";
+import { PostsType} from "../../../Typing/typing";
+import Post from "./Post/Post";
 
-type MyPostsType = {
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
 
+
+type MyPostsPropsType = {
+    addPost: () => void
+    updateNewPostText: (NewPostText: string) => void
+    postsElements: Array<PostsType>
 }
 
-const MyPosts: React.FC<MyPostsType> = (props) => {
-    let postsElements = props.store.getState().profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
-
+const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+    const myPostsRender = (p: PostsType) =>  <Post message={p.message} likesCount={p.likesCount}/>
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
-        if (newPostElement.current) {
-            props.dispatch(addPostAC(newPostElement.current.value))
-        }
+            props.addPost()
     }
 
     let onPostChange = () => {
         if (newPostElement.current) {
-            props.dispatch(updateNewPostTextAC(newPostElement.current.value))
+            props.updateNewPostText(newPostElement.current.value)
         }
 
     }
-
     return (
         <div className={s.postsBlock}>
             <h3> My posts</h3>
             <div>
                 <div className='textArea'>
-                    <textarea onChange = {onPostChange}
-                    ref={newPostElement}
-                        value={props.store.getState().profilePage.newPostText} />
+                    <textarea onChange={onPostChange}
+                              ref={newPostElement}
+                    />
                 </div>
                 <div className='button'>
                     <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
-                {postsElements}
+                {props.postsElements.map(myPostsRender)}
             </div>
         </div>
     )

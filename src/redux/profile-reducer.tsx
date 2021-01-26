@@ -15,7 +15,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
     if (action.type === "ADD-POST") {
         let newPost = {
             id: 5,
-            message: action.newPostText,
+            message: state.newPostText,
             likesCount: 0
         };
         state.posts.push(newPost);

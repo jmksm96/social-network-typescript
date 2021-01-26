@@ -7,8 +7,8 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {ActionsTypes, StoreType} from './Typing/typing';
+import DialogsConatiner from "./components/Dialogs/DialogsContainer";
 
 type PropsType = {
     store: StoreType
@@ -23,7 +23,7 @@ const App: React.FC<PropsType> = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs state={state} dispatch = {props.dispatch} store = {props.store}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsConatiner state={state} dispatch = {props.dispatch} store = {props.store}/>}/>
                     <Route path='/profile' render={() => <Profile store={props.store} dispatch = {props.dispatch}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
