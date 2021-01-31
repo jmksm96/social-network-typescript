@@ -1,36 +1,23 @@
 import React from 'react';
-import { StoreType, ActionsTypes} from '../../../Typing/typing';
+import {ActionsTypes, stateType} from '../../../Typing/typing';
 import {addPostAC, updateNewPostTextAC} from "../../../redux/state";
 import MyPosts from "./MyPosts";
+import { connect } from 'react-redux';
 
-type MyPostsType = {
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
-
+let mapStateToProps = (state: stateType) => {
+    return {
+        profilePage: state.profilePage
+    }
 }
 
-const MyPostsContainer: React.FC<MyPostsType> = (props) => {
-
-    let postsElements = props.store.getState().profilePage.posts
-
-
-    let addPost = () => {
-            props.dispatch(addPostAC())
+let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
+    return {
+        updateNewPostText: (text: string) => { dispatch(updateNewPostTextAC(text))},
+        addPost: () => { dispatch(addPostAC())}
     }
-
-    let onPostChange = (text: string) => {
-            props.dispatch(updateNewPostTextAC(text))
-
-    }
-
-    return (
-            <MyPosts postsElements = {postsElements}
-                     addPost = {addPost}
-                     updateNewPostText = {onPostChange}
-
-            />
-    )
 }
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer;
 

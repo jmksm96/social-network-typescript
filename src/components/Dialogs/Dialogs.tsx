@@ -12,8 +12,6 @@ type PropsType = {
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
-
-
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
     let dialogsElementsRender = (d: DialogsType) => <DialogItem name={d.name} id={d.id}/>
     let messagesElementsRender = (m: MessagesType) => <Message message={m.message} id={m.id}/>
@@ -23,7 +21,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
     }
 
     let onMessageChange = () => {
-        if(newMessageElement.current) {
+        if (newMessageElement.current) {
             props.updateNewMessageText(newMessageElement.current.value)
         }
 
@@ -40,7 +38,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
             <div>
                 <textarea ref={newMessageElement}
                           onChange={onMessageChange}
-                          // value={props.store.getState().dialogsPage.newMessageText}
+                    // value={props.store.getState().dialogsPage.newMessageText}
                 />
                 <button onClick={addMessage}>Add message</button>
             </div>

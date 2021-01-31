@@ -15,11 +15,9 @@ const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
-                     dispatch={props.dispatch}/>
+            <MyPostsContainer postsElements={props.store.getState().profilePage.posts}/>
+            {/*<MyPostsContainer store={props.store} dispatch={props.dispatch}/>*/}
 
-                     {/*<MyPosts store={props.store}*/}
-                     {/*dispatch={props.dispatch}/>*/}
         </div>
     )
 }
