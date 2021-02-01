@@ -1,19 +1,19 @@
 import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
-import {DialogsType, MessagesType} from "../../Typing/typing";
+import {DialogPageType, DialogsType, MessagesType} from "../../Typing/typing";
 import Message from "./Message/Message";
 
 type PropsType = {
     addMessage: () => void
     updateNewMessageText: (text: string) => void
-    dialogsElements: Array<DialogsType>
-    messagesElements: Array<MessagesType>
+    dialogsPage: DialogPageType
+    newMessageText: string
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
-    let dialogsElementsRender = (d: DialogsType) => <DialogItem name={d.name} id={d.id}/>
+    let dialogsElementsRender = (d: DialogsType) => <DialogItem name={d.name} id={d.id} key={d.id}/>
     let messagesElementsRender = (m: MessagesType) => <Message message={m.message} id={m.id}/>
 
     const addMessage = () => {
@@ -26,19 +26,18 @@ const Dialogs: React.FC<PropsType> = (props) => {
         }
 
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogsElements.map(dialogsElementsRender)}
+                {props.dialogsPage.dialogs.map(dialogsElementsRender)}
             </div>
             <div className={s.messages}>
-                {props.messagesElements.map(messagesElementsRender)}
+                {props.dialogsPage.messages.map(messagesElementsRender)}
             </div>
             <div>
                 <textarea ref={newMessageElement}
                           onChange={onMessageChange}
-                    // value={props.store.getState().dialogsPage.newMessageText}
+                          value={props.newMessageText}
                 />
                 <button onClick={addMessage}>Add message</button>
             </div>

@@ -10,22 +10,20 @@ import Profile from "./components/Profile/Profile";
 import {ActionsTypes, StoreType} from './Typing/typing';
 import DialogsConatiner from "./components/Dialogs/DialogsContainer";
 
-type PropsType = {
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
-}
+// type PropsType = {
+//     store: StoreType
+//     dispatch: (action: ActionsTypes) => void
+// }
 
-const App: React.FC<PropsType> = (props) => {
-    const state = props.store.getState()
+const App: React.FC = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsConatiner messagesElements = {state.dialogsPage.messages}
-                                                                           dialogsElements = {state.dialogsPage.dialogs}/>}/>
-                    <Route path='/profile' render={() => <Profile store={props.store} dispatch = {props.dispatch}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsConatiner />}/>
+                    <Route path='/profile' render={() => <Profile />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

@@ -1,23 +1,13 @@
 import React from 'react'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-
-import {ActionsTypes, StoreType} from '../../Typing/typing';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
-
-type PropsType = {
-    dispatch: (action: ActionsTypes) => void
-    store: StoreType
-}
-
-const Profile: React.FC<PropsType> = (props) => {
+const Profile: React.FC = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer postsElements={props.store.getState().profilePage.posts}/>
-            {/*<MyPostsContainer store={props.store} dispatch={props.dispatch}/>*/}
-
+            <MyPostsContainer/>
         </div>
     )
 }

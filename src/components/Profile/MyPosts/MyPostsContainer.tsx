@@ -1,12 +1,13 @@
 import React from 'react';
 import {ActionsTypes, stateType} from '../../../Typing/typing';
-import {addPostAC, updateNewPostTextAC} from "../../../redux/state";
 import MyPosts from "./MyPosts";
 import { connect } from 'react-redux';
+import {addPostAC, updateNewPostTextAC } from '../../../redux/profile-reducer';
 
 let mapStateToProps = (state: stateType) => {
     return {
-        profilePage: state.profilePage
+        profilePage: state.profilePage,
+        newPostText: state.profilePage.newPostText
     }
 }
 

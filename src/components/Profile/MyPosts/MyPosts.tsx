@@ -1,22 +1,21 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import { PostsType} from "../../../Typing/typing";
+import {PostsType, ProfilePageType} from "../../../Typing/typing";
 import Post from "./Post/Post";
-
-
 
 type MyPostsPropsType = {
     addPost: () => void
     updateNewPostText: (NewPostText: string) => void
-    postsElements: Array<PostsType>
+    profilePage: ProfilePageType
+    newPostText: string
 }
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    const myPostsRender = (p: PostsType) =>  <Post message={p.message} likesCount={p.likesCount}/>
     let newPostElement = React.createRef<HTMLTextAreaElement>()
+    const myPostsRender = (p: PostsType) => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>
 
     let addPost = () => {
-            props.addPost()
+        props.addPost()
     }
 
     let onPostChange = () => {
@@ -32,14 +31,14 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                 <div className='textArea'>
                     <textarea onChange={onPostChange}
                               ref={newPostElement}
-                    />
+                              value={props.newPostText}/>
                 </div>
                 <div className='button'>
                     <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
-                {props.postsElements.map(myPostsRender)}
+                {props.profilePage.posts.map(myPostsRender)}
             </div>
         </div>
     )

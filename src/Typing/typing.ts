@@ -1,4 +1,5 @@
-import {addMessageAC, addPostAC, updateNewMessageTextAC, updateNewPostTextAC} from "../redux/state";
+import { addMessageAC, updateNewMessageTextAC } from "../redux/dialogs-reducer";
+import { addPostAC, updateNewPostTextAC } from "../redux/profile-reducer";
 
 export type MessagesType = {
     id: number
