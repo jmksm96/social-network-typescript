@@ -1,5 +1,7 @@
-import { addMessageAC, updateNewMessageTextAC } from "../redux/dialogs-reducer";
-import { addPostAC, updateNewPostTextAC } from "../redux/profile-reducer";
+import {addMessageAC, updateNewMessageTextAC} from "../redux/dialogs-reducer";
+import {addPostAC, updateNewPostTextAC} from "../redux/profile-reducer";
+import {followAC, setUsersAC, unfollowAC} from "../redux/users-reducer";
+import * as url from "url";
 
 export type MessagesType = {
     id: number
@@ -25,13 +27,32 @@ export type DialogPageType = {
     newMessageText: string
 };
 
+export type UsersType = {
+    users: Array<UsersContainer>
+}
+
+export type UsersContainer = {
+    id: number,
+    followed: boolean
+    fullName: string
+    status: string
+    photoUrl: string
+    location: {
+        city: string,
+        country: string
+    }
+}
+
 export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
+    usersPage: UsersType
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
-                         | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof followAC> | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
 export type StoreType = {
     _state: stateType
     _callSubscriber: (state: stateType) => void

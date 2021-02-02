@@ -7,13 +7,8 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Profile from "./components/Profile/Profile";
-import {ActionsTypes, StoreType} from './Typing/typing';
 import DialogsConatiner from "./components/Dialogs/DialogsContainer";
-
-// type PropsType = {
-//     store: StoreType
-//     dispatch: (action: ActionsTypes) => void
-// }
+import UsersContainer from './components/Users/UsersContainer';
 
 const App: React.FC = (props) => {
     return (
@@ -24,6 +19,7 @@ const App: React.FC = (props) => {
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <DialogsConatiner />}/>
                     <Route path='/profile' render={() => <Profile />}/>
+                    <Route path='/users' render={() => <UsersContainer />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
