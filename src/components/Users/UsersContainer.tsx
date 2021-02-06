@@ -1,8 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Users from './Users'
-import {ActionsTypes, stateType} from "../../Typing/typing";
+import {ActionsTypes, stateType } from "../../Typing/typing";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
+import axios from "axios";
+
+
+axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+    console.log(response.data.items)
+})
 
 
 let mapStateToProps = (state: stateType) => {
@@ -18,11 +24,7 @@ let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
         },
         unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
-        },
-        setUsers: (userId: number) => {
-            dispatch(setUsersAC(userId))
-        },
-
+        }
     }
 }
 

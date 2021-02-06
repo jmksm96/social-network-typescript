@@ -43,8 +43,7 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case "FOLLOW":
             return {
-                ...state,
-                users: state.users.map(u => {
+                ...state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -54,8 +53,7 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
 
         case "UNFOLLOW":
             return {
-                ...state,
-                users: state.users.map(u => {
+                ...state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
@@ -77,13 +75,13 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
 export const followAC = (userId: number) => {
     return {
         type: "FOLLOW",
-        userId
+        userId: userId
     } as const
 }
 export const unfollowAC = (userId: number) => {
     return {
         type: "UNFOLLOW",
-        userId
+        userId: userId
     } as const
 }
 
@@ -96,3 +94,14 @@ export const setUsersAC = (users: any) => {
 
 
 export default usersReducer
+
+// case "FOLLOW":
+// return {
+//     ...state,
+//     users: state.users.map(u => {
+//         if (u.id === action.userId) {
+//             return {...u, followed: true}
+//         }
+//         return u
+//     })
+// }
