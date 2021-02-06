@@ -5,33 +5,33 @@ let initialState = {
     users: [
         {
             id: 1,
-            photoUrl: "https://www.knack.com/_images/live/users.png",
+            photos: "https://www.knack.com/_images/live/users.png",
             followed: true,
-            fullName: "Man1",
+            name: "Man1",
             status: 'Typescript',
             location: {city: "New-York", country: "USA"}
         },
         {
             id: 2,
-            photoUrl: "https://www.knack.com/_images/live/users.png",
+            photos: "https://www.knack.com/_images/live/users.png",
             followed: false,
-            fullName: "Man2",
+            name: "Man2",
             status: 'Redux',
             location: {city: "London", country: "United Kingdom"}
         },
         {
             id: 3,
-            photoUrl: "https://www.knack.com/_images/live/users.png",
+            photos: "https://www.knack.com/_images/live/users.png",
             followed: true,
-            fullName: "Man3",
+            name: "Man3",
             status: 'Javascript',
             location: {city: "Boston", country: "USA"}
         },
         {
             id: 4,
-            photoUrl: "https://www.knack.com/_images/live/users.png",
+            photos: "https://www.knack.com/_images/live/users.png",
             followed: false,
-            fullName: "Man4",
+            name: "Man4",
             status: 'NodeJS',
             location: {city: "San-Francisco", country: "USA"}
         },
@@ -43,7 +43,8 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case "FOLLOW":
             return {
-                ...state.users.map(u => {
+                ...state,
+                users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -53,7 +54,8 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
 
         case "UNFOLLOW":
             return {
-                ...state.users.map(u => {
+                ...state,
+                users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: false}
                     }

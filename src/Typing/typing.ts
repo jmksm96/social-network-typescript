@@ -27,31 +27,28 @@ export type DialogPageType = {
     newMessageText: string
 };
 
-// export type UsersType = {
-//     users: Array<UsersContainer>
-//     // users: UsersContainer
-// }
+export type UsersTypeContainer = {
+    users: Array<UsersType>
+}
 
- type UsersLocationType = {
-     location: {
-         city: string,
-         country: string
-     }
- }
+type UsersLocationType = {
+    city: string,
+    country: string
+}
 
 export type UsersType = {
-    id: number,
-    followed: boolean
+    id: number
+    photos: string
     name: string
     status: string
-    photos: any
     location: UsersLocationType
+    followed: boolean
 }
 
 export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
-    usersPage: Array<UsersType>
+    usersPage: UsersTypeContainer
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
