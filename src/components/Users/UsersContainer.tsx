@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Users from './Users'
-import {ActionsTypes, stateType, UsersType, UsersTypeContainer,} from "../../Typing/typing";
+import {ActionsTypes, stateType, UsersType} from "../../Typing/typing";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/users-reducer";
+import UsersC from './UsersС';
 
 
 
@@ -28,4 +28,4 @@ let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
 }
 
 
-export default connect (mapStateToProps, mapDispatchToProps) (Users)
+export default connect (mapStateToProps, mapDispatchToProps) (UsersC)
