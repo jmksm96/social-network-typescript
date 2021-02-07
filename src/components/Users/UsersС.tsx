@@ -10,22 +10,19 @@ type PropsType = {
     setUsers: (users: Array<UsersType>) => void
 }
 
-class UsersC extends React.Component<PropsType> {
+class Users extends React.Component<PropsType> {
 
+constructor(props: PropsType) {
+    super(props);
 
-     getUsers = () =>
-    {
-        if (this.props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    this.props.setUsers(response.data.items);
-                });
-        }
-    }
+    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        .then(response => {
+            this.props.setUsers(response.data.items);
+        });
+}
 
     render() {
         return <div>
-            <button onClick={this.getUsers}>Get Users</button>
             {
                 this.props.users.map(u => <div className={styles.users} key={u.id}>
                         <div><img className={styles.img} src={u.photos}/></div>
@@ -47,4 +44,4 @@ class UsersC extends React.Component<PropsType> {
     }
 }
 
-export default UsersC
+export default Users
