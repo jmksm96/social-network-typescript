@@ -97,13 +97,3 @@ export const setUsersAC = (users: any) => {
 
 export default usersReducer
 
-// case "FOLLOW":
-// return {
-//     ...state,
-//     users: state.users.map(u => {
-//         if (u.id === action.userId) {
-//             return {...u, followed: true}
-//         }
-//         return u
-//     })
-// }
