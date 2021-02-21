@@ -10,7 +10,7 @@ import Profile from "./components/Profile/Profile";
 import DialogsConatiner from "./components/Dialogs/DialogsContainer";
 import UsersContainer from './components/Users/UsersContainer';
 
-const App: React.FC = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>

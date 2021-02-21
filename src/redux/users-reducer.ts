@@ -1,41 +1,17 @@
-import {ActionsTypes} from "../Typing/typing";
+import {ActionsTypes, UsersType} from "../Typing/typing";
 
+export type UsersStateType = {
+    users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+}
 
-let initialState = {
-    users: [
-        {
-            id: 1,
-            photos: "https://www.knack.com/_images/live/users.png",
-            followed: true,
-            name: "Man1",
-            status: 'Typescript',
-            location: {city: "New-York", country: "USA"}
-        },
-        {
-            id: 2,
-            photos: "https://www.knack.com/_images/live/users.png",
-            followed: false,
-            name: "Man2",
-            status: 'Redux',
-            location: {city: "London", country: "United Kingdom"}
-        },
-        {
-            id: 3,
-            photos: "https://www.knack.com/_images/live/users.png",
-            followed: true,
-            name: "Man3",
-            status: 'Javascript',
-            location: {city: "Boston", country: "USA"}
-        },
-        {
-            id: 4,
-            photos: "https://www.knack.com/_images/live/users.png",
-            followed: false,
-            name: "Man4",
-            status: 'NodeJS',
-            location: {city: "San-Francisco", country: "USA"}
-        },
-    ]
+let initialState: UsersStateType = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 2
 }
 
 const usersReducer = (state = initialState, action: ActionsTypes) => {
@@ -51,7 +27,6 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
                     return u
                 })
             }
-
         case "UNFOLLOW":
             return {
                 ...state,
@@ -62,12 +37,12 @@ const usersReducer = (state = initialState, action: ActionsTypes) => {
                     return u
                 })
             }
-
         case "SET_USERS":
-            return {
-                ...state,
-                users: [...state.users, ...action.users]
-            }
+            return {...state, users: action.users}
+        case "SET_CURRENT_PAGE":
+            return {...state, currentPage: action.currentPage}
+        case "SET_TOTAL_USERS_COUNT":
+            return {...state, totalUsersCount: action.count}
 
         default:
             return state
@@ -90,7 +65,20 @@ export const unfollowAC = (userId: number) => {
 export const setUsersAC = (users: any) => {
     return {
         type: "SET_USERS",
-        users
+        users: users
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: "SET_CURRENT_PAGE",
+        currentPage: currentPage
+    } as const
+}
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: "SET_TOTAL_USERS_COUNT",
+        count: totalUsersCount
     } as const
 }
 
