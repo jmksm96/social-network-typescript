@@ -1,14 +1,14 @@
 import {addMessageAC, updateNewMessageTextAC} from "../redux/dialogs-reducer";
 import {addPostAC, updateNewPostTextAC} from "../redux/profile-reducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
+
 } from "../redux/users-reducer";
-import * as url from "url";
 
 export type MessagesType = {
     id: number
@@ -64,14 +64,14 @@ export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     usersPage: UsersTypeContainer
-    totalusersCount: number
+    totalUsersCount: number
 }
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
-    | ReturnType<typeof followAC> | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC> | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof follow> | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
 export type StoreType = {
     _state: stateType
     _callSubscriber: (state: stateType) => void

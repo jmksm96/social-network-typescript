@@ -5,16 +5,15 @@ import {
     UsersType, UsersTypeContainer,
 } from "../../Typing/typing";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
 } from "../../redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
-import preloader from './../../assets/images/preloader.gif';
 import Preloader from "../../common/preloader/preloader";
 
 type PropsType = {
@@ -30,29 +29,6 @@ let mapStateToProps = (state: PropsType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching
-    }
-}
-
-let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
     }
 }
 
@@ -94,19 +70,22 @@ class UsersContainer extends React.Component<PropsTypeContainer> {
 
     render() {
         return <>
-        {this.props.isFetching ? <Preloader/> : null}
-        <Users onPageChanged={this.onPageChanged}
-               follow={this.props.follow}
-               unfollow={this.props.unfollow}
-               currentPage={this.props.currentPage}
-               pageSize={this.props.pageSize}
-               totalUsersCount={this.props.totalUsersCount}
-               users={this.props.users}
+            {this.props.isFetching ? <Preloader/> : null}
+            <Users onPageChanged={this.onPageChanged}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   currentPage={this.props.currentPage}
+                   pageSize={this.props.pageSize}
+                   totalUsersCount={this.props.totalUsersCount}
+                   users={this.props.users}
 
-        />
-     </>
+            />
+        </>
     }
 }
 
+export default connect(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching
+})(UsersContainer)
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+
