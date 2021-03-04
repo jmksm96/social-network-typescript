@@ -7,8 +7,8 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainerAPI from "./components/Profile/ProfileContainerAPI";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import ProfileContainerAPI from './components/Profile/ProfileContainerAPI';
 
 
 
@@ -20,7 +20,7 @@ const App = () => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <DialogsContainer />}/>
-                    <Route path='/profile' render={() => <ProfileContainerAPI />}/>
+                    <Route path='/profile/:userId?' exact render={() => <ProfileContainerAPI />}/>
                     <Route path='/users' render={() => <UsersContainer />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

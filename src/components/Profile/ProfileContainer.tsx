@@ -2,16 +2,26 @@ import React from 'react'
 import Profile from "./Profile";
 import axios from "axios";
 import {UserProfileType} from "../../Typing/typing";
+import { RouteComponentProps } from 'react-router-dom';
 
 
 type PropsTypeProfile = {
-    profile: UserProfileType
     setUserProfile: (profile: UserProfileType) => void;
+    profile: UserProfileType
+    defaultUserId: string;
 }
 
-class ProfileContainer extends React.Component<PropsTypeProfile> {
+type RouteType = {
+    userId: string;
+};
+
+class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponentProps<RouteType>> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userId = Number((this.props.match.params).userId);
+
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
                 this.props.setUserProfile(response.data);
             });

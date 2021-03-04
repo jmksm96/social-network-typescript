@@ -23,7 +23,7 @@ const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 
-let initialState = {
+let initialState:ProfilePageType = {
     posts: [
         {id: 1, message: "Message one", likesCount: 1},
         {id: 2, message: "Message two", likesCount: 12},
@@ -31,7 +31,8 @@ let initialState = {
         {id: 4, message: "Message four", likesCount: 10},
     ],
     newPostText: "",
-    profile: {} as UserProfileType
+    profile: {} as UserProfileType,
+    defaultUserId: "2"
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionsType): ProfilePageType => {

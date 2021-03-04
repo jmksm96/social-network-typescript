@@ -25,6 +25,7 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: UserProfileType
+    defaultUserId: string;
 
 };
 export type DialogPageType = {

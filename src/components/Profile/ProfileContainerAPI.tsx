@@ -4,16 +4,23 @@ import {connect} from 'react-redux';
 import ProfileContainer from './ProfileContainer';
 import { AppStateType } from '../../redux/store';
 import {setUserProfile} from "../../redux/profile-reducer";
+import { withRouter } from 'react-router';
+
 
 
 type MapStateToPropsType = {
     profile: UserProfileType
+    defaultUserId: string;
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        defaultUserId: state.profilePage.defaultUserId
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
+const withRouterProfileContainer = withRouter(ProfileContainer)
+
+const ProfileContainerAPI = connect(mapStateToProps,  {setUserProfile})(withRouterProfileContainer);
+export default ProfileContainerAPI
