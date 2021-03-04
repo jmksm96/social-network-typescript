@@ -2,6 +2,7 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/users.png";
 import React from "react";
 import {UsersType} from "../../Typing/typing";
+import { NavLink } from "react-router-dom";
 
 
 type PropsType = {
@@ -36,7 +37,11 @@ const Users = (props:PropsType ) => {
         </div>
         {
             props.users.map(u => <div className={styles.users} key={u.id}>
-                    <div>< img className={styles.img} src={u.photos.small != null ? u.photos.small: userPhoto}/></div>
+                    <div>
+                        <NavLink to ={'/profile' + u.id}>
+                        <img className={styles.img} src={u.photos.small != null ? u.photos.small: userPhoto}/>
+                        </NavLink>
+                    </div>
                     <div>Name: {u.name}</div>
                     <div>Status: {u.status}</div>
                     <div>

@@ -1,5 +1,3 @@
-import {addMessageAC, updateNewMessageTextAC} from "../redux/dialogs-reducer";
-import {addPostAC, updateNewPostTextAC} from "../redux/profile-reducer";
 import {
     follow,
     setCurrentPage,
@@ -26,6 +24,7 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: UserProfileType
 
 };
 export type DialogPageType = {
@@ -33,7 +32,6 @@ export type DialogPageType = {
     messages: Array<MessagesType>
     newMessageText: string
 };
-
 export type UsersTypeContainer = {
     users: Array<UsersType>
     pageSize: number
@@ -47,14 +45,13 @@ type UsersLocationType = {
     country: string
 }
 
-
 export type UsersType = {
     name: string
     id: number
     photos: {
-    small: string | undefined
-    large: string | undefined
-}
+        small: string | undefined
+        large: string | undefined
+    }
     status: string
     location: UsersLocationType
     followed: boolean
@@ -63,19 +60,41 @@ export type UsersType = {
 export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
-    usersPage: UsersTypeContainer
-    totalUsersCount: number
+    // usersPage: UsersTypeContainer
+    // userProfilePage: UserProfileType
+
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
-    | ReturnType<typeof follow> | ReturnType<typeof unfollow>
-    | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
-export type StoreType = {
-    _state: stateType
-    _callSubscriber: (state: stateType) => void
-    subscribe: (observer: (state: stateType) => void) => void
-    getState: () => stateType
-    dispatch: (action: ActionsTypes) => void
+// export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow>
+//     | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage>
+//     | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
+//
+// export type StoreType = {
+//     _state: stateType
+//     _callSubscriber: (state: stateType) => void
+//     subscribe: (observer: (state: stateType) => void) => void
+//     getState: () => stateType
+//     dispatch: (action: ActionsTypes) => void
+// }
+
+export type UserProfileType = {
+    aboutMe: string;
+    contacts: {
+        facebook: string;
+        website: string | null;
+        vk: string;
+        twitter: string;
+        instagram: string;
+        youtube: string | null;
+        github: string;
+        mainLink: string | null;
+    };
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    userId: number;
+    photos: {
+        small: string;
+        large: string;
+    };
 }

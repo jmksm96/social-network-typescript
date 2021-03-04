@@ -1,4 +1,22 @@
-import {ActionsTypes, DialogPageType} from "../Typing/typing";
+import {DialogPageType} from "../Typing/typing";
+
+//START TYPE
+
+type AddMessageType = {
+    type: typeof ADD_MESSAGE
+}
+
+type UpdateNewPostActionType = {
+    type: typeof UPDATE_NEW_MESSAGE;
+    newMessageText: string;
+};
+
+
+export type DialogsReducerActionsType = AddMessageType | UpdateNewPostActionType
+
+//END TYPE
+const ADD_MESSAGE = "ADD-MESSAGE";
+const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
 
 let initialState = {
     dialogs: [
@@ -20,10 +38,16 @@ let initialState = {
     newMessageText: "",
 }
 
-const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes) => {
+const dialogsReducer = (state: DialogPageType = initialState, action: DialogsReducerActionsType):DialogPageType => {
 
     switch (action.type) {
-        case "ADD-MESSAGE": {
+        case UPDATE_NEW_MESSAGE: {
+            return  {
+                ...state,
+               newMessageText: action.newMessageText
+            }
+        }
+        case ADD_MESSAGE: {
             let newMessage = state.newMessageText
             return {
                 ...state,
@@ -31,28 +55,22 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTyp
                 messages: [...state.messages, {id: 6, message: newMessage}]
             };
         }
-        case "UPDATE-NEW-MESSAGE": {
-            return  {
-                ...state,
-               newMessageText: action.newMessageText
-            }
-        }
         default:
             return state
     }
 }
 
 
-export const addMessageAC = () => {
+export const addMessageAC = (): AddMessageType => {
     return {
-        type: "ADD-MESSAGE"
-    } as const
+        type: ADD_MESSAGE
+    }
 }
-export const updateNewMessageTextAC = (NewMessageText: string) => {
+export const updateNewMessageTextAC = (NewMessageText: string): UpdateNewPostActionType => {
     return {
-        type: "UPDATE-NEW-MESSAGE",
+        type: UPDATE_NEW_MESSAGE,
         newMessageText: NewMessageText
-    } as const
+    }
 }
 
 export default dialogsReducer

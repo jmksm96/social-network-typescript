@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {
-    ActionsTypes, DialogPageType, ProfilePageType,
+     DialogPageType, ProfilePageType,
     UsersType, UsersTypeContainer,
 } from "../../Typing/typing";
 import {

@@ -11,7 +11,7 @@ type PropsType = {
     newMessageText: string
 }
 
-const Dialogs: React.FC<PropsType> = (props) => {
+const   Dialogs: React.FC<PropsType> = (props) => {
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
     let dialogsElementsRender = (d: DialogsType) => <DialogItem name={d.name} id={d.id} key={d.id}/>
     let messagesElementsRender = (m: MessagesType) => <Message message={m.message} id={m.id}/>
