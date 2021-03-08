@@ -10,11 +10,13 @@ import {UsersAPI} from "../../api/api";
 type PropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    toggleFollowingInProgress: (followingInProgress: boolean, userId: number) => void
     users: Array<UsersType>
     onPageChanged:(pageNumber: number) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    followingUsers: Array<number>
 }
 
 const Users = (props:PropsType ) => {
@@ -48,7 +50,8 @@ const Users = (props:PropsType ) => {
                     <div>Status: {u.status}</div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
+                            ? <button disabled={props.followingUsers.some(id => id ===u.id)} onClick={() => {
+                                props.toggleFollowingInProgress(true, u.id)
                                 // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
                                 //     withCredentials: true,
                                 //     headers:
@@ -66,15 +69,17 @@ const Users = (props:PropsType ) => {
                                         if (response.data.resultCode === 0) {
                                             props.unfollow(u.id)
                                         }
+                                        props.toggleFollowingInProgress(false, u.id)
                                     });
                             }}>Unfollow</button>
-                            : <button onClick={() => {
-
+                            : <button  disabled={props.followingUsers.some(id => id ===u.id)} onClick={() => {
+                                props.toggleFollowingInProgress(true, u.id)
                                 UsersAPI.follow(u.id)
                                     .then(response => {
                                        if (response.data.resultCode === 0) {
                                            props.follow(u.id)
                                        }
+                                        props.toggleFollowingInProgress(false, u.id)
                                     });
                                 // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{
                                 //     withCredentials: true,

@@ -39,6 +39,8 @@ export type UsersTypeContainer = {
     currentPage: number
     totalUsersCount: number
     isFetching: boolean
+    followingInProgress: boolean
+    followingUsers: Array<number>
 }
 
 type UsersLocationType = {
