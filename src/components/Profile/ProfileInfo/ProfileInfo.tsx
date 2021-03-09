@@ -8,9 +8,9 @@ type PropsType = {
     profile: UserProfileType
 }
 const ProfileInfo = (props:PropsType ) => {
-    // if (!props.profile) {
-    //     return <Preloader/>
-    // }
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return (
         <div>
             <div>
@@ -18,8 +18,18 @@ const ProfileInfo = (props:PropsType ) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos
-                    ?(props.profile.photos.large ? props.profile.photos.large : "") : "" }/>
-                ava + description
+                    ?(props.profile.photos.large ? props.profile.photos.large : "") : "" }/> <br/>
+                <ul style={{ listStyleType: "none", paddingLeft: '0px', marginLeft: '0px' }}>
+                    <li> {props.profile.fullName} </li>
+                    <li> {props.profile.aboutMe}</li>
+                    <li> {props.profile.lookingForAJob ? "Yes" : "No"}</li>
+                </ul>
+                <div>
+                    Contacts:
+                    {props.profile.contacts && Object.entries(props.profile.contacts).map(value => {
+                        return value[1] && <div><a href={value[1]}>{value[0]}</a></div>
+                    })}
+                </div>
             </div>
         </div>
     )
