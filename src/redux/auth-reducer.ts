@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+
 export type authACType = {
     type: typeof SET_USER_DATA;
     data: UserDataType
@@ -61,6 +63,17 @@ export const setAuthUserData = (id: number, email: string, login: string): authA
         }
     }
 
+}
+
+export const getAuthUserData = () => (dispatch: any) =>{
+    return authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                const {id,email,login}  = response.data.data
+                dispatch(setAuthUserData(id, email, login))
+                return id
+            }
+        });
 }
 
 export default authReducer

@@ -3,7 +3,7 @@ import { UserProfileType} from "../../Typing/typing";
 import {connect} from 'react-redux';
 import ProfileContainer from './ProfileContainer';
 import { AppStateType } from '../../redux/store';
-import {setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile} from "../../redux/profile-reducer";
 import { withRouter } from 'react-router';
 
 
@@ -22,5 +22,5 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const withRouterProfileContainer = withRouter(ProfileContainer)
 
-const ProfileContainerAPI = connect(mapStateToProps,  {setUserProfile})(withRouterProfileContainer);
+const ProfileContainerAPI = connect(mapStateToProps , {getUserProfile})(withRouterProfileContainer);
 export default ProfileContainerAPI

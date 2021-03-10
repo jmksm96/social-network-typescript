@@ -36,10 +36,7 @@ type PropsTypeContainer = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     users: Array<UsersType>
-    // setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageNumber: number) => void
-    // setTotalUsersCount: (totalCount: number) => void
-    // toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingInProgress: (followingInProgress: boolean, userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
     followingUsers: Array<number>

@@ -1,4 +1,5 @@
 import {ProfilePageType, UserProfileType} from "../Typing/typing";
+import {UsersAPI} from "../api/api";
 
 //START TYPE
 
@@ -15,15 +16,14 @@ type SetUserProfileType = {
     profile: UserProfileType;
 };
 
-//END TYPE
-
+//END
 export type ProfileReducerActionsType = AddPostActionType | UpdateNewPostActionType | SetUserProfileType;
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 
-let initialState:ProfilePageType = {
+let initialState: ProfilePageType = {
     posts: [
         {id: 1, message: "Message one", likesCount: 1},
         {id: 2, message: "Message two", likesCount: 12},
@@ -82,8 +82,24 @@ export const setUserProfile = (profile: UserProfileType): SetUserProfileType => 
         profile: profile
     }
 }
+export const getUserProfile = (userId: number) => (dispatch: any) => {
+    UsersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data));
+        });
+}
+// export const profileThunk = (userId: number) => {
+//     return (dispatch: any) => {
+//         UsersAPI.profile(userId)
+//             .then(response => {
+//                 dispatch(setUserProfile(response.data))
+//             })
+//     }
+// }
+
 
 export default profileReducer
+
 
 
 
