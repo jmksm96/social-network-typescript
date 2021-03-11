@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from "./Profile";
 import {UserProfileType} from "../../Typing/typing";
-import { RouteComponentProps } from 'react-router-dom';
+import {Redirect, RouteComponentProps} from 'react-router-dom';
 
 
 
@@ -9,6 +9,7 @@ import { RouteComponentProps } from 'react-router-dom';
 type PropsTypeProfile = {
     profile: UserProfileType
     defaultUserId: string;
+    isAuth: boolean
     getUserProfile: (userId: number) => void
 }
 
@@ -26,6 +27,9 @@ class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponent
     }
 
     render() {
+        if (!this.props.isAuth) {
+            return <Redirect to={'/login'}/>
+        }
         return (
             <div>
                 <Profile {...this.props} profile={this.props.profile}/>

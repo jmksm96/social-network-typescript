@@ -9,14 +9,16 @@ import { withRouter } from 'react-router';
 
 
 type MapStateToPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType;
     defaultUserId: string;
+    isAuth: boolean;
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        defaultUserId: state.profilePage.defaultUserId
+        defaultUserId: state.profilePage.defaultUserId,
+        isAuth: state.auth.isAuth
     }
 }
 
