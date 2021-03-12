@@ -3,8 +3,6 @@ import userPhoto from "../../assets/images/users.png";
 import React from "react";
 import {UsersType} from "../../Typing/typing";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {UsersAPI} from "../../api/api";
 
 
 type PropsType = {

@@ -3,14 +3,13 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogPageType, DialogsType, MessagesType} from "../../Typing/typing";
 import Message from "./Message/Message";
-import { Redirect } from "react-router-dom";
 
 type PropsType = {
     addMessage: () => void
     updateNewMessageText: (text: string) => void
     dialogsPage: DialogPageType
     newMessageText: string
-    isAuth: boolean
+
 }
 
 const  Dialogs: React.FC<PropsType> = (props) => {
@@ -28,10 +27,10 @@ const  Dialogs: React.FC<PropsType> = (props) => {
         }
 
     }
-
-    if (!props.isAuth) {
-        return <Redirect to = {'/login'}/>
-    }
+    //
+    // if (!props.isAuth) {
+    //     return <Redirect to = {'/login'}/>
+    // }
 
     return (
         <div className={s.dialogs}>
