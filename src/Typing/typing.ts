@@ -26,7 +26,7 @@ export type ProfilePageType = {
     newPostText: string
     profile: UserProfileType
     defaultUserId: string;
-
+    status: string
 };
 export type DialogPageType = {
     dialogs: Array<DialogsType>
@@ -96,6 +96,7 @@ export type UserProfileType = {
     lookingForAJobDescription: string;
     fullName: string;
     userId: number;
+    status: string
     photos: {
         small: string;
         large: string;

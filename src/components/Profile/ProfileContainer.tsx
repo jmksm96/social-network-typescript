@@ -10,6 +10,9 @@ type PropsTypeProfile = {
     profile: UserProfileType
     defaultUserId: string;
     getUserProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string) => void
+    status: string
 }
 
 type RouteType = {
@@ -23,12 +26,13 @@ class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponent
             userId = 2
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus = {this.props.updateStatus}/>
             </div>
         )
     }
