@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 
 
 type PropsType = {
@@ -21,6 +21,13 @@ const ProfileStatus = (props: PropsType) => {
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
+
+    useEffect(() => {
+
+        // if()
+        setStatus(status)
+
+    });
 
     return (
         <div>
