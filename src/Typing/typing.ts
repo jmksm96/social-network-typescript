@@ -1,12 +1,3 @@
-import {
-    follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    toggleIsFetching,
-    unfollow,
-
-} from "../redux/users-reducer";
 
 export type MessagesType = {
     id: number
@@ -63,22 +54,7 @@ export type UsersType = {
 export type stateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
-    // usersPage: UsersTypeContainer
-    // userProfilePage: UserProfileType
-
 }
-
-// export type ActionsTypes = ReturnType<typeof follow> | ReturnType<typeof unfollow>
-//     | ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage>
-//     | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof toggleIsFetching>
-//
-// export type StoreType = {
-//     _state: stateType
-//     _callSubscriber: (state: stateType) => void
-//     subscribe: (observer: (state: stateType) => void) => void
-//     getState: () => stateType
-//     dispatch: (action: ActionsTypes) => void
-// }
 
 export type UserProfileType = {
     aboutMe: string;
