@@ -2,6 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {PostsType, ProfilePageType} from "../../../Typing/typing";
 import Post from "./Post/Post";
+import { Field } from 'redux-form';
 
 type MyPostsPropsType = {
     addPost: () => void
@@ -31,7 +32,7 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                 <div className='textArea'>
                     <textarea onChange={onPostChange}
                               ref={newPostElement}
-                              value={props.newPostText}/>
+                               />
                 </div>
                 <div className='button'>
                     <button onClick={addPost}>Add post</button>
@@ -42,6 +43,10 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             </div>
         </div>
     )
+}
+
+const MyPostsReduxForm = () => {
+
 }
 
 export default MyPosts;

@@ -26,7 +26,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 let mapDispatchToProps = (dispatch: (action: DialogsReducerActionsType) => void) => {
     return {
         updateNewMessageText: (text: string) => { dispatch(updateNewMessageTextAC(text))},
-        addMessage: () => { dispatch(addMessageAC())}
+        addMessage: (newMessageText: string) => { dispatch(addMessageAC(newMessageText))}
     }
 }
 

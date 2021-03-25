@@ -4,6 +4,7 @@ import {DialogPageType} from "../Typing/typing";
 
 type AddMessageType = {
     type: typeof ADD_MESSAGE
+    newMessageText: string
 }
 
 type UpdateNewPostActionType = {
@@ -48,7 +49,7 @@ const dialogsReducer = (state: DialogPageType = initialState, action: DialogsRed
             }
         }
         case ADD_MESSAGE: {
-            let newMessage = state.newMessageText
+            let newMessage = action.newMessageText
             return {
                 ...state,
                 newMessageText: "",
@@ -61,9 +62,10 @@ const dialogsReducer = (state: DialogPageType = initialState, action: DialogsRed
 }
 
 
-export const addMessageAC = (): AddMessageType => {
+export const addMessageAC = (newMessageText: string): AddMessageType => {
     return {
-        type: ADD_MESSAGE
+        type: ADD_MESSAGE,
+        newMessageText
     }
 }
 export const updateNewMessageTextAC = (NewMessageText: string): UpdateNewPostActionType => {
