@@ -2,42 +2,24 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {PostsType, ProfilePageType} from "../../../Typing/typing";
 import Post from "./Post/Post";
-import { Field } from 'redux-form';
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 type MyPostsPropsType = {
-    addPost: () => void
-    updateNewPostText: (NewPostText: string) => void
+    addPost: (newPostText: string) => void
     profilePage: ProfilePageType
     newPostText: string
 }
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
     const myPostsRender = (p: PostsType) => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>
-
-    let addPost = () => {
-        props.addPost()
+    let addNewPost = (values: any) => {
+        props.addPost(values.newPostText)
     }
 
-    let onPostChange = () => {
-        if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
-        }
-
-    }
     return (
         <div className={s.postsBlock}>
             <h3> My posts</h3>
-            <div>
-                <div className='textArea'>
-                    <textarea onChange={onPostChange}
-                              ref={newPostElement}
-                               />
-                </div>
-                <div className='button'>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
+            <MyPostsReduxForm onSubmit = {addNewPost }/>
             <div className={s.posts}>
                 {props.profilePage.posts.map(myPostsRender)}
             </div>
@@ -45,9 +27,20 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     )
 }
 
-const MyPostsReduxForm = () => {
-
+const MyPostsForm: React.FC<InjectedFormProps> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div className='textArea'>
+                <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your post'}/>
+            </div>
+            <div className='button'>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
 }
+
+const MyPostsReduxForm = reduxForm({form: 'myPostsAddPostForm'})(MyPostsForm)
 
 export default MyPosts;
 

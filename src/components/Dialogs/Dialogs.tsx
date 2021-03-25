@@ -7,33 +7,19 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
     addMessage: (newMessageText: string) => void
-    updateNewMessageText: (text: string) => void
     dialogsPage: DialogPageType
     newMessageText: string
 
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
-    let newMessageElement = React.createRef<HTMLTextAreaElement>()
     let dialogsElementsRender = (d: DialogsType) => <DialogItem name={d.name} id={d.id} key={d.id}/>
     let messagesElementsRender = (m: MessagesType) => <Message message={m.message} id={m.id}/>
 
 
-
-    let onMessageChange = () => {
-        if (newMessageElement.current) {
-            props.updateNewMessageText(newMessageElement.current.value)
-        }
-
-    }
-
     let addNewMessage = (values: any) => {
         props.addMessage(values.newMessageText)
     }
-    //
-    // if (!props.isAuth) {
-    //     return <Redirect to = {'/login'}/>
-    // }
 
     return (
         <div className={s.dialogs}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {  stateType} from '../../../Typing/typing';
 import MyPosts from "./MyPosts";
 import { connect } from 'react-redux';
-import {addPostAC, ProfileReducerActionsType, updateNewPostTextAC } from '../../../redux/profile-reducer';
+import {addPostAC, ProfileReducerActionsType} from '../../../redux/profile-reducer';
 
 let mapStateToProps = (state: stateType) => {
     return {
@@ -13,8 +13,7 @@ let mapStateToProps = (state: stateType) => {
 
 let mapDispatchToProps = (dispatch: (action: ProfileReducerActionsType) => void) => {
     return {
-        updateNewPostText: (text: string) => { dispatch(updateNewPostTextAC(text))},
-        addPost: () => { dispatch(addPostAC())}
+        addPost: (newPostText: string) => { dispatch(addPostAC(newPostText))}
     }
 }
 

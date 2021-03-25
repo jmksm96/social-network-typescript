@@ -7,17 +7,12 @@ type AddMessageType = {
     newMessageText: string
 }
 
-type UpdateNewPostActionType = {
-    type: typeof UPDATE_NEW_MESSAGE;
-    newMessageText: string;
-};
 
-
-export type DialogsReducerActionsType = AddMessageType | UpdateNewPostActionType
+export type DialogsReducerActionsType = AddMessageType
 
 //END TYPE
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
+
 
 let initialState = {
     dialogs: [
@@ -42,12 +37,6 @@ let initialState = {
 const dialogsReducer = (state: DialogPageType = initialState, action: DialogsReducerActionsType):DialogPageType => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE: {
-            return  {
-                ...state,
-               newMessageText: action.newMessageText
-            }
-        }
         case ADD_MESSAGE: {
             let newMessage = action.newMessageText
             return {
@@ -66,12 +55,6 @@ export const addMessageAC = (newMessageText: string): AddMessageType => {
     return {
         type: ADD_MESSAGE,
         newMessageText
-    }
-}
-export const updateNewMessageTextAC = (NewMessageText: string): UpdateNewPostActionType => {
-    return {
-        type: UPDATE_NEW_MESSAGE,
-        newMessageText: NewMessageText
     }
 }
 
