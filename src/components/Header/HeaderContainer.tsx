@@ -9,6 +9,7 @@ type PropsType = {
     getAuthUserData: () => void
     isAuth: boolean,
     login: string
+    id: number | null
 }
 
 class HeaderContainer extends React.Component<PropsType> {
@@ -18,14 +19,15 @@ class HeaderContainer extends React.Component<PropsType> {
     }
 
     render() {
-        return <Header login={this.props.login} isAuth={this.props.isAuth}/>
+        return <Header login={this.props.login} isAuth={this.props.isAuth} id = {this.props.id}/>
     }
 }
 
-const mapStateToProps = (state: AppStateType):{isAuth: boolean, login: string} => {
+const mapStateToProps = (state: AppStateType):{isAuth: boolean, login: string, id: number | null} => {
     return {
         isAuth: state.auth.isAuth,
-        login: state.auth.data.login
+        login: state.auth.data.login,
+        id: state.auth.data.id
     }
 }
 

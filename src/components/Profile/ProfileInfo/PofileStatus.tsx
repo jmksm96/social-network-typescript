@@ -18,22 +18,17 @@ const ProfileStatus = (props: PropsType) => {
         props.updateStatus(status)
     }
 
+    useEffect(() => {setStatus(props.status)}, [props.status])
+
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
-
-    useEffect(() => {
-
-        // if()
-        setStatus(status)
-
-    });
 
     return (
         <div>
             {!editMode &&
             <div>
-                <span onDoubleClick={activateEditMode}>{!props.status || "----"}</span>
+                <span onDoubleClick={activateEditMode}>{props.status || "----"}</span>
             </div>
             }
             {editMode &&

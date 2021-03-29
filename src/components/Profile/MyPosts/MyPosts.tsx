@@ -3,6 +3,8 @@ import s from './MyPosts.module.css';
 import {PostsType, ProfilePageType} from "../../../Typing/typing";
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLengthCreator, required } from '../../../utils/validators/validator';
+import Textarea from "../../../common/forms-controls/FormsControls";
 
 type MyPostsPropsType = {
     addPost: (newPostText: string) => void
@@ -19,7 +21,7 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     return (
         <div className={s.postsBlock}>
             <h3> My posts</h3>
-            <MyPostsReduxForm onSubmit = {addNewPost }/>
+            <MyPostsReduxForm onSubmit={addNewPost}/>
             <div className={s.posts}>
                 {props.profilePage.posts.map(myPostsRender)}
             </div>
@@ -27,11 +29,16 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     )
 }
 
+    const maxLength10 = maxLengthCreator(10)
+
 const MyPostsForm: React.FC<InjectedFormProps> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className='textArea'>
-                <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your post'}/>
+                <Field component={Textarea}
+                       name={'newPostText'}
+                       placeholder={'Enter your post'}
+                       validate={[required, maxLength10]}/>
             </div>
             <div className='button'>
                 <button>Add post</button>
