@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "./Header";
 import {connect} from 'react-redux';
 import {getAuthUserData, logout,} from '../../redux/auth-reducer'
@@ -13,15 +13,12 @@ type PropsType = {
     logout: () => void
 }
 
-class HeaderContainer extends React.Component<PropsType> {
+const HeaderContainer = (props: PropsType) => {
+    useEffect(() => {
+        props.getAuthUserData()
+    })
 
-    componentDidMount() {
-        this.props.getAuthUserData()
-    }
-
-    render() {
-        return <Header login={this.props.login} isAuth={this.props.isAuth} id = {this.props.id} logout={this.props.logout}/>
-    }
+    return <Header login={props.login} isAuth={props.isAuth} id = {props.id} logout={props.logout}/>
 }
 
 const mapStateToProps = (state: AppStateType):{isAuth: boolean, login: string | null, id: number | null} => {

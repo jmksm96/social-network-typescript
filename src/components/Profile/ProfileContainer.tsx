@@ -1,9 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Profile from "./Profile";
 import {UserProfileType} from "../../Typing/typing";
-import { RouteComponentProps} from 'react-router-dom';
-
-
+import {RouteComponentProps} from 'react-router-dom';
 
 
 type PropsTypeProfile = {
@@ -19,24 +17,41 @@ type RouteType = {
     userId: string;
 };
 
-class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponentProps<RouteType>> {
-    componentDidMount() {
-        let userId = Number((this.props.match.params).userId);
-        if (!userId) {
-            userId = 2
-        }
-        this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
-    }
 
-    render() {
-        return (
-            <div>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus = {this.props.updateStatus}/>
-            </div>
-        )
-    }
+const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteType>> = (props) => {
+    let userId = Number((props.match.params).userId);
 
+    useEffect(() => {
+        props.getUserProfile(userId)
+        props.getStatus(userId)
+    })
+
+    return (
+        <div>
+            <Profile {...props} profile={props.profile} status={props.status} updateStatus = {props.updateStatus}/>
+        </div>
+    )
 }
+
+
+// class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponentProps<RouteType>> {
+//     componentDidMount() {
+//         let userId = Number((this.props.match.params).userId);
+//         if (!userId) {
+//             userId = 2
+//         }
+//         this.props.getUserProfile(userId)
+//         this.props.getStatus(userId)
+//     }
+//
+//     render() {
+//         return (
+//             <div>
+//                 <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus = {this.props.updateStatus}/>
+//             </div>
+//         )
+//     }
+//
+// }
 
 export default ProfileContainer

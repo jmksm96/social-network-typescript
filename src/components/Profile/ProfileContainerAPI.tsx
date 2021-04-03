@@ -33,4 +33,4 @@ export default compose<React.ComponentType>(
     withAuthRedirect
 )(ProfileContainer)
 
-// export default ProfileContainerAPI
+
