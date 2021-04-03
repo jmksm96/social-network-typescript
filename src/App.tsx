@@ -13,12 +13,14 @@ import Login from './components/Login/Login';
 
 
 
+
+
 const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <HeaderContainer />
-                <Navbar/>
+                <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={() => <DialogsContainer />}/>
                     <Route path='/profile/:userId?' exact render={() => <ProfileContainerAPI />}/>

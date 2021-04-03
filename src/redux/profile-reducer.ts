@@ -36,7 +36,7 @@ let initialState: ProfilePageType = {
     ],
     newPostText: "",
     profile: {} as UserProfileType,
-    defaultUserId: "2",
+    defaultUserId: 2,
     status: ""
 }
 

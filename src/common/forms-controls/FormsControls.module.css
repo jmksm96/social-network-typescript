@@ -3,9 +3,13 @@
     border: 2px solid red;
 }
 
-
 .formControl.error span {
     color: #a80210;
 
 }
 
+.formSummaryError {
+    border: red 1px solid;
+    padding: 5px;
+    color: lightcoral;
+}

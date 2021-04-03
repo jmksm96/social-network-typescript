@@ -6,7 +6,7 @@ import {RouteComponentProps} from 'react-router-dom';
 
 type PropsTypeProfile = {
     profile: UserProfileType
-    defaultUserId: string;
+    defaultUserId: number;
     getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
@@ -20,6 +20,9 @@ type RouteType = {
 
 const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteType>> = (props) => {
     let userId = Number((props.match.params).userId);
+    if (!userId) {
+        userId = props.defaultUserId
+    }
 
     useEffect(() => {
         props.getUserProfile(userId)
@@ -28,7 +31,10 @@ const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteTyp
 
     return (
         <div>
-            <Profile {...props} profile={props.profile} status={props.status} updateStatus = {props.updateStatus}/>
+            <Profile {...props}
+                     profile={props.profile}
+                     status={props.status}
+                     updateStatus={props.updateStatus}/>
         </div>
     )
 }

@@ -11,16 +11,18 @@ import {compose} from 'redux';
 
 type MapStateToPropsType = {
     profile: UserProfileType;
-    defaultUserId: string;
+    defaultUserId: number;
     status: string
+    isAuth: boolean
 }
 
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status,
         defaultUserId: state.profilePage.defaultUserId,
-        status: state.profilePage.status
+        isAuth: state.auth.data.isAuth
     }
 }
 
