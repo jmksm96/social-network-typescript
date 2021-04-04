@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {
     DialogPageType, ProfilePageType,
@@ -47,6 +47,32 @@ type PropsTypeContainer = {
     currentPage: number
     isFetching: boolean
 }
+
+
+// const UsersContainer:React.FC<PropsTypeContainer> = (props) => {
+//     useEffect(() => {
+//         props.getUsers(props.currentPage, props.pageSize)
+//     })
+//
+//    const onPageChanged = (pageNumber: number) => {
+//         props.getUsers(pageNumber, props.pageSize)
+//     }
+//     return (
+//         <div>
+//                  {props.isFetching ? <Preloader/> : null}
+//                  <Users onPageChanged={onPageChanged}
+//                        follow={props.follow}
+//                        unfollow={props.unfollow}
+//                        currentPage={props.currentPage}
+//                        pageSize={props.pageSize}
+//                        totalUsersCount={props.totalUsersCount}
+//                        users={props.users}
+//                        toggleFollowingInProgress={props.toggleFollowingInProgress}
+//                        followingUsers={props.followingUsers}
+//                 />
+//             </div>
+//     )
+// }
 
 class UsersContainer extends React.Component<PropsTypeContainer> {
 

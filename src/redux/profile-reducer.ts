@@ -1,5 +1,6 @@
 import {ProfilePageType, UserProfileType} from "../Typing/typing";
 import {ProfileAPI, UsersAPI} from "../api/api";
+import {AppStateType} from "./store";
 
 //START TYPE
 
@@ -27,6 +28,8 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 
+
+
 let initialState: ProfilePageType = {
     posts: [
         {id: 1, message: "Message one", likesCount: 1},
@@ -36,7 +39,7 @@ let initialState: ProfilePageType = {
     ],
     newPostText: "",
     profile: {} as UserProfileType,
-    defaultUserId: 2,
+    defaultUserId: 12063,
     status: ""
 }
 

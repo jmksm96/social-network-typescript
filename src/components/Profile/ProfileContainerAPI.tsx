@@ -14,6 +14,7 @@ type MapStateToPropsType = {
     defaultUserId: number;
     status: string
     isAuth: boolean
+
 }
 
 
@@ -22,7 +23,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         defaultUserId: state.profilePage.defaultUserId,
-        isAuth: state.auth.data.isAuth
+        isAuth: state.auth.data.isAuth,
+
     }
 }
 

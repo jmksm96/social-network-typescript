@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from "./Header";
 import {connect} from 'react-redux';
-import {getAuthUserData, logout,} from '../../redux/auth-reducer'
+import { logout,} from '../../redux/auth-reducer'
 import {AppStateType} from '../../redux/store';
 
 
 type PropsType = {
-    getAuthUserData: () => void
     isAuth: boolean,
     login: string | null
     id: number | null
@@ -14,9 +13,7 @@ type PropsType = {
 }
 
 const HeaderContainer = (props: PropsType) => {
-    useEffect(() => {
-        props.getAuthUserData()
-    })
+
 
     return <Header login={props.login} isAuth={props.isAuth} id = {props.id} logout={props.logout}/>
 }
@@ -31,4 +28,4 @@ const mapStateToProps = (state: AppStateType):{isAuth: boolean, login: string | 
 
 
 
-export default connect(mapStateToProps, {getAuthUserData, logout})(HeaderContainer);
+export default connect(mapStateToProps, { logout})(HeaderContainer);
