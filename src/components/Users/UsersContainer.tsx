@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {
-    DialogPageType, ProfilePageType,
-    UsersType, UsersTypeContainer,
-} from "../../Typing/typing";
+import {UsersType} from "../../Typing/typing";
 import {
     follow, getUsersThunkCreator,
     setCurrentPage,
@@ -14,23 +11,21 @@ import Users from "./Users";
 import Preloader from "../../common/preloader/preloader";
 import {compose} from 'redux';
 import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {getCurrentPage, getFollowingProgress,
+    getfollowingUsers,
+    getIsFetching, getPageSize, getTotalUsersCount, getUsersSelector} from '../../redux/users-selectors';
+import {AppStateType} from "../../redux/store";
 
 
-type PropsType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-    usersPage: UsersTypeContainer
-}
-
-let mapStateToProps = (state: PropsType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        followingUsers: state.usersPage.followingUsers
+        users: getUsersSelector(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingProgress(state),
+        followingUsers: getfollowingUsers(state)
     }
 }
 
