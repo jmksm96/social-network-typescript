@@ -12,20 +12,20 @@ import Preloader from "../../common/preloader/preloader";
 import {compose} from 'redux';
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {getCurrentPage, getFollowingProgress,
-    getfollowingUsers,
-    getIsFetching, getPageSize, getTotalUsersCount, getUsersSelector} from '../../redux/users-selectors';
+    getFollowingUsers,
+    getIsFetching, getPageSize, getTotalUsersCount, getUsersSuper} from '../../redux/users-selectors';
 import {AppStateType} from "../../redux/store";
 
 
 let mapStateToProps = (state: AppStateType) => {
     return {
-        users: getUsersSelector(state),
+        users: getUsersSuper(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingProgress(state),
-        followingUsers: getfollowingUsers(state)
+        followingUsers: getFollowingUsers(state)
     }
 }
 
@@ -53,7 +53,7 @@ type PropsTypeContainer = {
 //         props.getUsers(pageNumber, props.pageSize)
 //     }
 //     return (
-//         <div>
+//         <>
 //                  {props.isFetching ? <Preloader/> : null}
 //                  <Users onPageChanged={onPageChanged}
 //                        follow={props.follow}
@@ -65,7 +65,7 @@ type PropsTypeContainer = {
 //                        toggleFollowingInProgress={props.toggleFollowingInProgress}
 //                        followingUsers={props.followingUsers}
 //                 />
-//             </div>
+//             </>
 //     )
 // }
 
