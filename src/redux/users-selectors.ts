@@ -5,9 +5,11 @@ import {createSelector} from "reselect";
     return state.usersPage.users
 }
 
- const getUsersSelector = (state: AppStateType) => {
-    return getUsers(state).filter(u => true)
+export const getUsersSelector = (state: AppStateType) => {
+     return getUsers(state).filter(u => true)
 }
+
+
 export const getUsersSuperSelector = createSelector(getUsers,(users) => {
   return users.filter(u => true)
 })
