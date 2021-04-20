@@ -13,6 +13,12 @@ type SetUserProfileType = {
     type: typeof SET_USER_PROFILE;
     profile: UserProfileType;
 };
+
+type DeletePostType = {
+    type: typeof DELETE_POST
+    postId: number;
+
+};
 type SetStatusProfileType = {
     type: typeof SET_STATUS;
     status: string;
@@ -22,12 +28,13 @@ type SetStatusProfileType = {
 export type ProfileReducerActionsType =
     AddPostActionType
     | SetUserProfileType
-    | SetStatusProfileType;
+    | SetStatusProfileType
+    | DeletePostType
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
-
+const DELETE_POST = "DELETE_POST";
 
 
 let initialState: ProfilePageType = {
@@ -66,6 +73,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
             return {...state, status: action.status}
         }
 
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter(p => p.id != action.postId)}
+        }
+
         default:
             return state
     }
@@ -89,6 +100,14 @@ export const setStatus = (status: string): SetStatusProfileType => {
         status
     }
 }
+
+export const deletePostAC = (postId: number): DeletePostType => {
+    return {
+        type: DELETE_POST,
+        postId
+    }
+}
+
 
 export const getUserProfile = (userId: number) => (dispatch: any) => {
     UsersAPI.getProfile(userId)

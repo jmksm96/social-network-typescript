@@ -30,8 +30,7 @@ const MyPostsForm: React.FC<InjectedFormProps> = (props) => {
 }
 
 const MyPosts: React.FC<MyPostsPropsType> = React.memo((props: MyPostsPropsType) => {
-    console.log('Render')
-    const myPostsRender = (p: PostsType) =><Post message={p.message} likesCount={p.likesCount} key={p.id}/>
+    const myPostsRender = (p: PostsType) => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>
 
     let addNewPost = (values: any) => {
         props.addPost(values.newPostText)
