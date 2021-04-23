@@ -1,6 +1,6 @@
 import {ProfilePageType, UserProfileType} from "../Typing/typing";
 import {ProfileAPI, UsersAPI} from "../api/api";
-import {AppStateType} from "./store";
+
 
 //START TYPE
 
@@ -74,7 +74,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
         }
 
         case DELETE_POST: {
-            return {...state, posts: state.posts.filter(p => p.id != action.postId)}
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         }
 
         default:
@@ -109,27 +109,21 @@ export const deletePostAC = (postId: number): DeletePostType => {
 }
 
 
-export const getUserProfile = (userId: number) => (dispatch: any) => {
-    UsersAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data));
-        });
+export const getUserProfile = (userId: number) => async (dispatch: any) => {
+    let response = await UsersAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data));
 }
 
-export const getStatus = (userId: number) => (dispatch: any) => {
-    ProfileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatus(response.data));
-        });
+export const getStatus = (userId: number) => async (dispatch: any) => {
+    let response = await ProfileAPI.getStatus(userId)
+    dispatch(setStatus(response.data));
 }
 
-export const updateStatus = (status: string) => (dispatch: any) => {
-    ProfileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        });
+export const updateStatus = (status: string) => async (dispatch: any) => {
+    let response = await ProfileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
 
 

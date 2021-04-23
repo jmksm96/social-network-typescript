@@ -20,7 +20,7 @@ export type UserReducerActionsType = authACType
 type AuthReducerThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, UserReducerActionsType>
 
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "Social-network/SET_USER_DATA";
 
 type InitialStateType = {
     data: UserDataType
@@ -58,36 +58,30 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 }
 
 
-export const getAuthUserData = (): AuthReducerThunkType => (dispatch ) => {
-   return authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        });
+export const getAuthUserData = (): AuthReducerThunkType => async (dispatch) => {
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {id, login, email} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
 
-export const login = (email: string, password: any, rememberMe: boolean) : AuthReducerThunkType => (dispatch:any) => {
-    authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserData())
-            } else {
-               let message = response.data.messages.length > 0 ? response.data.messages[0]: "Some error"
-                dispatch(stopSubmit('login', {_error: message}))
-            }
-        });
+export const login = (email: string, password: any, rememberMe: boolean): AuthReducerThunkType => async (dispatch: any) => {
+    let response = await authAPI.login(email, password, rememberMe)
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+        dispatch(stopSubmit('login', {_error: message}))
+    }
 }
 
 
-export const logout = ():AuthReducerThunkType => (dispatch) => {
-    authAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        });
+export const logout = (): AuthReducerThunkType => async (dispatch) => {
+    let response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
 }
 
 export default authReducer
