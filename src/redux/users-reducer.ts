@@ -1,6 +1,7 @@
 import {UsersType} from "../Typing/typing";
 import {UsersAPI} from "../api/api";
 
+
 type FollowACType = {
     type: typeof FOLLOW;
     userId: number;
@@ -80,6 +81,7 @@ const usersReducer = (state = initialState, action: UserReducerActionsType) => {
                     }
                     return u
                 })
+
             }
         case UNFOLLOW:
             return {
