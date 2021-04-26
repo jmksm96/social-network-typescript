@@ -24,7 +24,7 @@ const Users = (props: PropsType) => {
 
     return <div>
         <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
-                   pageSize={props.pageSize} totalUsersCount={props.totalUsersCount}/>
+                   pageSize={props.pageSize} totalUsersCount={props.totalUsersCount} portionSize={10}/>
         {
              props.users.map (u=> <User followingUsers={props.followingUsers}
                                         user={u}
