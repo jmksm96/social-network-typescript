@@ -19,6 +19,12 @@ type DeletePostType = {
     postId: number;
 
 };
+
+type SavePhotoSuccessType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: any; /*поправить типизацию*/
+
+};
 type SetStatusProfileType = {
     type: typeof SET_STATUS;
     status: string;
@@ -30,11 +36,13 @@ export type ProfileReducerActionsType =
     | SetUserProfileType
     | SetStatusProfileType
     | DeletePostType
+    | SavePhotoSuccessType
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 const DELETE_POST = "DELETE_POST";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 
 
 let initialState: ProfilePageType = {
@@ -77,6 +85,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         }
 
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
+
         default:
             return state
     }
@@ -107,6 +119,12 @@ export const deletePostAC = (postId: number): DeletePostType => {
         postId
     }
 }
+export const savePhotoSuccess = (photos: string): SavePhotoSuccessType => {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    }
+}
 
 
 export const getUserProfile = (userId: number) => async (dispatch: any) => {
@@ -123,6 +141,14 @@ export const updateStatus = (status: string) => async (dispatch: any) => {
     let response = await ProfileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+
+export const savePhoto = (file: string) => async (dispatch: any) => {
+    let response = await ProfileAPI.savePhoto(file)
+
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 

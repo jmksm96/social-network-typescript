@@ -11,6 +11,7 @@ type PropsTypeProfile = {
     getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
+    savePhoto: (file: string) => void
     status: string
 }
 
@@ -23,7 +24,7 @@ const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteTyp
     let userId = Number((props.match.params).userId);
     if (!userId) {
         userId = props.defaultUserId
-        if(!userId) {
+        if (!userId) {
             props.history.push('/login/')
         }
     }
@@ -33,12 +34,16 @@ const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteTyp
         props.getStatus(userId)
     })
 
+
+
     return (
         <div>
             <Profile {...props}
+                     isOwner={!props.match.params.userId}
                      profile={props.profile}
                      status={props.status}
-                     updateStatus={props.updateStatus}/>
+                     updateStatus={props.updateStatus}
+                     savePhoto = {props.savePhoto}/>
         </div>
     )
 }

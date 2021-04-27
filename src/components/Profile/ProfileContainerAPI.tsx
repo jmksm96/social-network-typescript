@@ -3,7 +3,7 @@ import {UserProfileType} from "../../Typing/typing";
 import {connect} from 'react-redux';
 import ProfileContainer from './ProfileContainer';
 import {AppStateType} from '../../redux/store';
-import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, updateStatus, savePhoto} from "../../redux/profile-reducer";
 import {withRouter} from 'react-router';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
@@ -32,7 +32,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
  withAuthRedirect(withRouter(connect(mapStateToProps, {getUserProfile})(ProfileContainer)))
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps,  {getUserProfile, getStatus, updateStatus}),
+    connect(mapStateToProps,  {getUserProfile, getStatus, updateStatus, savePhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
