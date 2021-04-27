@@ -6,8 +6,6 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import ProfileContainerAPI from './components/Profile/ProfileContainerAPI';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import {connect} from 'react-redux';
@@ -16,7 +14,8 @@ import {AppStateType} from "./redux/store";
 import Preloader from "./common/preloader/preloader";
 
 
-
+const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
+const ProfileContainerAPI = React.lazy(() => import( './components/Profile/ProfileContainerAPI'))
 
 type PropsType = {
     initialized: boolean
@@ -29,7 +28,7 @@ const App = (props: PropsType) => {
     })
 
 
-    if(!props.initialized) {
+    if (!props.initialized) {
         return <Preloader/>
     }
 
@@ -39,8 +38,17 @@ const App = (props: PropsType) => {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' exact render={() => <ProfileContainerAPI/>}/>
+                    <Route path='/dialogs' render={() => {
+                        return <React.Suspense fallback={<div>Loading...</div>}>
+                            <DialogsContainer/>
+                        </React.Suspense>
+
+                    }}/>
+                    <Route path='/profile/:userId?' exact render={() => {
+                        return <React.Suspense fallback={<div>Loading...</div>}> {/*В лоадинг добавить прогрессбар загрузки*/}
+                            <ProfileContainerAPI/>
+                        </React.Suspense>
+                    }}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                     <Route path='/news' render={() => <News/>}/>
@@ -53,13 +61,10 @@ const App = (props: PropsType) => {
 }
 
 
-const mapStateToProps = (state:AppStateType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         initialized: state.app.initialized
     }
 }
 
-export default connect (mapStateToProps, {initializeApp})(App)
-// export default compose(
-//     withRouter,
-//     connect(mapStateToProps, {initializeApp}))(App);
+export default connect(mapStateToProps, {initializeApp})(App)
