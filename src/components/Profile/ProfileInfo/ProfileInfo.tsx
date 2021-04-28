@@ -15,7 +15,8 @@ type PropsType = {
     savePhoto: (file: string) => void
 
 }
-const ProfileInfo = (props:PropsType ) => {
+const ProfileInfo = React.memo ((props:PropsType ) => {
+    console.log('rendered')
     if (!props.profile) {
         return <Preloader/>
     }
@@ -49,6 +50,6 @@ const ProfileInfo = (props:PropsType ) => {
             </div>
         </div>
     )
-}
+})
 
 export default ProfileInfo;

@@ -1,11 +1,11 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import {PostsType, ProfilePageType} from "../../../Typing/typing";
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLengthCreator, required } from '../../../utils/validators/validator';
 import { Input } from '../../../common/forms-controls/FormsControls';
-import {log} from "util";
+
 
 type MyPostsPropsType = {
     addPost: (newPostText: string) => void

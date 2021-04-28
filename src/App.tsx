@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import {BrowserRouter, Route} from 'react-router-dom';
+import React, {useEffect, useState} from 'react'
+import {BrowserRouter, Link, NavLink, Route} from 'react-router-dom';
 import './App.css';
 import Music from './components/Music/Music';
 import Navbar from './components/Navbar/Navbar';
@@ -8,21 +8,45 @@ import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/store";
 import Preloader from "./common/preloader/preloader";
-
-
-const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
-const ProfileContainerAPI = React.lazy(() => import( './components/Profile/ProfileContainerAPI'))
+import 'antd/dist/antd.css'
+import {Layout, Menu} from 'antd';
+import {
+    MenuUnfoldOutlined,
+    MenuFoldOutlined,
+    UserOutlined,
+    TeamOutlined,
+    MailOutlined,
+    LoadingOutlined,
+    SettingOutlined,
+    PlaySquareOutlined
+} from '@ant-design/icons';
+import s from "./components/Navbar/Navbar.module.css";
+import Avatar from 'antd/lib/avatar/avatar';
+import { selectIsAuth } from './redux/auth-selectors';
 
 type PropsType = {
     initialized: boolean
     initializeApp: () => void
 }
 
+const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
+const ProfileContainerAPI = React.lazy(() => import( './components/Profile/ProfileContainerAPI'))
+
+const {Header, Sider, Content} = Layout;
+
+
 const App = (props: PropsType) => {
+
+    const [collapsed, setCollapsed] = useState(false)
+
+    const toggle = () => {
+        setCollapsed(true)
+    }
+
     useEffect(() => {
         props.initializeApp()
     })
@@ -34,28 +58,87 @@ const App = (props: PropsType) => {
 
     return (
         <BrowserRouter>
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}>
-                            <DialogsContainer/>
-                        </React.Suspense>
+            <Layout>
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className="logo"/>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                        <Menu.Item key="1" icon={<UserOutlined/>}>
+                            <Link to='/profile'>My Profile</Link>
+                        </Menu.Item>
+                        <Menu.Item key="2" icon={<TeamOutlined/>}>
+                            <Link to='/users'>Users</Link>
+                        </Menu.Item>
+                        <Menu.Item key="3" icon={<MailOutlined/>}>
+                            <Link to='/dialogs'>Messages</Link>
+                        </Menu.Item>
+                        <Menu.Item key="4" icon={<PlaySquareOutlined/>}>
+                            <Link to='/music'>Music</Link>
+                        </Menu.Item>
+                        <Menu.Item key="5" icon={<SettingOutlined/>}>
+                            <Link to='/settings'>Settings</Link>
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+                <Layout className="site-layout">
+                    {/*<Header className="site-layout-background" style={{padding: 0}}>*/}
+                    {/*    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {*/}
+                    {/*        className: 'trigger',*/}
+                    {/*        onClick: toggle,*/}
+                    {/*    })}*/}
+                    {/*    <Avatar icon={<UserOutlined />}/>*/}
+                    {/*</Header>*/}
+                    <Header/>
+                    <Content
+                        className="site-layout-background"
+                        style={{
+                            margin: '24px 16px',
+                            padding: 24,
+                            minHeight: 280,
+                        }}
+                    >
+                        <Route path='/dialogs' render={() => {
+                            return <React.Suspense fallback={<div><LoadingOutlined/></div>}>
+                                <DialogsContainer/>
+                            </React.Suspense>
 
-                    }}/>
-                    <Route path='/profile/:userId?' exact render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}> {/*В лоадинг добавить прогрессбар загрузки*/}
-                            <ProfileContainerAPI/>
-                        </React.Suspense>
-                    }}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                </div>
-            </div>
+                        }}/>
+                        <Route path='/profile/:userId?' exact render={() => {
+                            return <React.Suspense
+                                fallback={<div><LoadingOutlined/></div>}>
+                                <ProfileContainerAPI/>
+                            </React.Suspense>
+                        }}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                    </Content>
+                </Layout>
+            </Layout>
+
+            {/*<div className='app-wrapper'>*/}
+            {/*    <HeaderContainer/>*/}
+            {/*    <Navbar/>*/}
+            {/*    <div className='app-wrapper-content'>*/}
+            {/*        <Route path='/dialogs' render={() => {*/}
+            {/*            return <React.Suspense fallback={<div>Loading...</div>}>*/}
+            {/*                <DialogsContainer/>*/}
+            {/*            </React.Suspense>*/}
+
+            {/*        }}/>*/}
+            {/*        <Route path='/profile/:userId?' exact render={() => {*/}
+            {/*            return <React.Suspense fallback={<div>Loading...</div>}> /!*В лоадинг добавить прогрессбар загрузки*!/*/}
+            {/*                <ProfileContainerAPI/>*/}
+            {/*            </React.Suspense>*/}
+            {/*        }}/>*/}
+            {/*        <Route path='/users' render={() => <UsersContainer/>}/>*/}
+            {/*        <Route path='/login' render={() => <Login/>}/>*/}
+            {/*        <Route path='/news' render={() => <News/>}/>*/}
+            {/*        <Route path='/music' render={() => <Music/>}/>*/}
+            {/*        <Route path='/settings' render={() => <Settings/>}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </BrowserRouter>
     )
 }
