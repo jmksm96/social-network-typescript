@@ -11,7 +11,7 @@ type PropsTypeProfile = {
     getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
-    savePhoto: (file: string) => void
+    savePhoto: (file: File) => void
     status: string
 }
 
@@ -32,7 +32,7 @@ const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteTyp
     useEffect(() => {
         props.getUserProfile(userId)
         props.getStatus(userId)
-    })
+    }, [])
 
 
 

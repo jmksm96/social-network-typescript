@@ -27,6 +27,7 @@ import {
 import s from "./components/Navbar/Navbar.module.css";
 import Avatar from 'antd/lib/avatar/avatar';
 import { selectIsAuth } from './redux/auth-selectors';
+import Header from "./components/Header/Header";
 
 type PropsType = {
     initialized: boolean
@@ -36,7 +37,7 @@ type PropsType = {
 const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
 const ProfileContainerAPI = React.lazy(() => import( './components/Profile/ProfileContainerAPI'))
 
-const {Header, Sider, Content} = Layout;
+const { Sider, Content} = Layout;
 
 
 const App = (props: PropsType) => {
@@ -80,14 +81,7 @@ const App = (props: PropsType) => {
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    {/*<Header className="site-layout-background" style={{padding: 0}}>*/}
-                    {/*    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {*/}
-                    {/*        className: 'trigger',*/}
-                    {/*        onClick: toggle,*/}
-                    {/*    })}*/}
-                    {/*    <Avatar icon={<UserOutlined />}/>*/}
-                    {/*</Header>*/}
-                    <Header/>
+                    <HeaderContainer/>
                     <Content
                         className="site-layout-background"
                         style={{

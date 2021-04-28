@@ -5,12 +5,9 @@ import Avatar from "antd/lib/avatar/avatar";
 import {Button, Layout} from "antd";
 import {useSelector} from "react-redux";
 import {getUserId, selectCurrentUserLogin, selectIsAuth} from '../../redux/auth-selectors';
-import { logout } from '../../redux/auth-reducer';
+
 
 type HeaderPropsType = {
-    isAuth: boolean,
-    login: string | null
-    id: number | null
     logout: () => void
 }
 
@@ -36,33 +33,16 @@ const Header = (props: HeaderPropsType) => {
                 ? <Link to={'/profile/' + id}>
                     <div>
                         <Avatar icon={<UserOutlined/>}/>
-                        {login} -  <Button onClick={props.logout}>Logout</Button>
+                        {login} - <Button onClick={props.logout}>Logout</Button>
                     </div>
                 </Link>
                 : <Link to={'/login'}>Login</Link>}
 
         </div>
 
-
     </Header>
 }
-// const Header = (props: HeaderPropsType) => {
-//     return <header className={s.header}>
-//         <img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' />
-//
-//         <div className={s.loginBlock}>
-//             {props.isAuth
-//                 ? <NavLink to = {'/profile/' + props.id}>
-//                     <div>
-//                         {props.login}
-//                         <button onClick={props.logout}>Logout</button>
-//                     </div>
-//                    </NavLink>
-//                 :<NavLink to = {'/login'}> Login</NavLink> }
-//
-//         </div>
-//     </header>
-// }
+
 
 export default Header;
 

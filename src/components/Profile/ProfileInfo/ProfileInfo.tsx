@@ -12,16 +12,16 @@ type PropsType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: (file: string) => void
+    savePhoto: (file: File) => void
 
 }
 const ProfileInfo = React.memo ((props:PropsType ) => {
-    console.log('rendered')
+    // console.log(props.profile.photos.large)
     if (!props.profile) {
         return <Preloader/>
     }
 
-    const onMainPhotoSelected = (e:any) => {   /* поправить типизацию*/
+     const onMainPhotoSelected= (e:any) => {   /* поправить типизацию*/
         if (e.target.files.length) {
             props.savePhoto(e.target.files[0])
         }
@@ -29,12 +29,9 @@ const ProfileInfo = React.memo ((props:PropsType ) => {
 
     return (
         <div>
-            <div>
-                <img src='https://dgdesign.ru/uploads/posts/2019-02/1549455082_shapka-sayta-vesna-1151132.jpg'/>
-            </div>
             <div className={s.descriptionBlock }>
-                <img src={props.profile.photos ? props.profile.photos.large : profilePhoto } className={s.profilePhoto} onChange={onMainPhotoSelected}/> <br/>
-                {props.isOwner && <input type="file"/>}
+                <img src={ props.profile.photos && props.profile.photos.large ? props.profile.photos.large : profilePhoto } className={s.profilePhoto} /> <br/>
+                {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
                 <ul style={{ listStyleType: "none", paddingLeft: '0px', marginLeft: '0px' }}>
                     <li> {props.profile.fullName} </li>

@@ -9,7 +9,7 @@ type PropsType = {
     updateStatus: (status: string) => void
     status: string
     isOwner: boolean
-    savePhoto: (file: string) => void
+    savePhoto: (file: File) => void
 }
 const Profile: React.FC<PropsType> = (props) => {
     return (

@@ -5,6 +5,7 @@ import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLengthCreator, required } from '../../../utils/validators/validator';
 import { Input } from '../../../common/forms-controls/FormsControls';
+import Button from 'antd/lib/button/button';
 
 
 type MyPostsPropsType = {
@@ -21,9 +22,7 @@ const MyPostsForm: React.FC<InjectedFormProps> = (props) => {
                        name={'newPostText'}
                        placeholder={'Enter your post'}
                        validate={[required, maxLength10]}/>
-                <div className='button'>
                     <button>Add post</button>
-                </div>
             </div>
         </form>
     )

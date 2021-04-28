@@ -1,4 +1,4 @@
-import {ProfilePageType, UserProfileType} from "../Typing/typing";
+import {PhotosType, ProfilePageType, UserProfileType} from "../Typing/typing";
 import {ProfileAPI, UsersAPI} from "../api/api";
 
 
@@ -119,7 +119,7 @@ export const deletePostAC = (postId: number): DeletePostType => {
         postId
     }
 }
-export const savePhotoSuccess = (photos: string): SavePhotoSuccessType => {
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessType => {
     return {
         type: SAVE_PHOTO_SUCCESS,
         photos
@@ -144,11 +144,11 @@ export const updateStatus = (status: string) => async (dispatch: any) => {
     }
 }
 
-export const savePhoto = (file: string) => async (dispatch: any) => {
+export const savePhoto = (file: File) => async (dispatch: any) => {
     let response = await ProfileAPI.savePhoto(file)
 
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+    if (response.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.photos))
     }
 }
 

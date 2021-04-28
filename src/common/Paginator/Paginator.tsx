@@ -1,6 +1,7 @@
 import styles from "./Paginator.module.css"
 import React, { useState } from "react";
 import cn from "classnames";
+import Pagination from "antd/lib/pagination/Pagination";
 
 type PropsType = {
     pageSize: number
@@ -24,7 +25,8 @@ const Paginator = (props: PropsType) => {
     let rightPortionPageNumber = portionNumber * props.portionSize;
 
 
-    return <div className={styles.paginator}>
+    return<div className={styles.paginator}>
+
         { portionNumber > 1 &&
         <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button> }
 
@@ -48,3 +50,4 @@ const Paginator = (props: PropsType) => {
 export default Paginator
 
 
+// <Pagination size="small" total={50} showSizeChanger showQuickJumper />

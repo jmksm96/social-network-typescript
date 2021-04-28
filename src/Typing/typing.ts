@@ -73,8 +73,9 @@ export type UserProfileType = {
     fullName: string;
     userId: number;
     status: string
-    photos: {
-        small: string;
-        large: string;
-    };
+    photos: PhotosType
+}
+export type PhotosType = {
+    small: string | null;
+    large: string | null;
 }

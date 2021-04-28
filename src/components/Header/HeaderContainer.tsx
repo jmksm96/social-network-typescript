@@ -15,7 +15,7 @@ type PropsType = {
 const HeaderContainer = (props: PropsType) => {
 
 
-    return <Header login={props.login} isAuth={props.isAuth} id = {props.id} logout={props.logout}/>
+    return <Header logout={props.logout}/>
 }
 
 const mapStateToProps = (state: AppStateType):{isAuth: boolean, login: string | null, id: number | null} => {
