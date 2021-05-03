@@ -70,9 +70,9 @@ let initialState: UsersStateType = {
 }
 
 const usersReducer = (state = initialState, action: UserReducerActionsType) => {
-
     switch (action.type) {
         case FOLLOW :
+            debugger
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -171,7 +171,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: any, actionCreator: any) => {
     dispatch(toggleFollowingInProgress(true, userId));
     let response = await apiMethod(userId)
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingInProgress(false, userId))

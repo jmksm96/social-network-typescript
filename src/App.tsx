@@ -21,7 +21,7 @@ import {
     TeamOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import s from "./components/Navbar/Navbar.module.css";
+
 
 
 type PropsType = {
@@ -52,16 +52,31 @@ const App = (props: PropsType) => {
         return <Preloader/>
     }
 
+
+
     return (
         <BrowserRouter>
-            <Layout>
+            {/*<div>*/}
+            {/*    <div>H</div>*/}
+            {/*    <div>*/}
+            {/*        <div>LS</div>*/}
+            {/*        <div>CON</div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
+            {/*<Layout>*/}
+            {/*    <Layout></Layout>*/}
+            {/*</Layout>*/}
+
+
+            <Layout>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     <div className="logo"/>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1" icon={<UserOutlined/>}>
                             <Link to='/profile'>My Profile</Link>
                         </Menu.Item>
+
                         <Menu.Item key="2" icon={<TeamOutlined/>}>
                             <Link to='/users'>Users</Link>
                         </Menu.Item>
@@ -76,11 +91,12 @@ const App = (props: PropsType) => {
                         </Menu.Item>
                     </Menu>
 
+
                 </Sider>
 
 
                 <Layout className="site-layout">
-                    <div ><HeaderContainer/></div>
+
                     <Content
                         className="site-layout-background"
                         style={{

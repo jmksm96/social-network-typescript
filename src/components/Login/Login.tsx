@@ -2,13 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 // import {createField, Input} from '../../common/forms-controls/FormsControls';
-import {createField, Input} from '../../common/forms-controls/FormsControls';
+import {Input} from '../../common/forms-controls/FormsControls';
 import {login} from '../../redux/auth-reducer';
 import {required} from "../../utils/validators/validator";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/store";
 import s from '../../common/forms-controls/FormsControls.module.css'
-import {Formik} from 'formik';
 
 
 type FormDataType = {
@@ -73,12 +72,6 @@ const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.data.isAuth
 })
 
-// const LoginFormikk = () => {
-//     return <div>
-//         <Formik>
-//
-//         </Formik>
-//     </div>
-// }
+
 
 export default connect(mapStateToProps, {login})(Login)
