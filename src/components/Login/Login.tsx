@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+// import {createField, Input} from '../../common/forms-controls/FormsControls';
 import {createField, Input} from '../../common/forms-controls/FormsControls';
 import {login} from '../../redux/auth-reducer';
 import {required} from "../../utils/validators/validator";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/store";
 import s from '../../common/forms-controls/FormsControls.module.css'
+import {Formik} from 'formik';
 
 
 type FormDataType = {
@@ -19,11 +21,11 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-                {/*<Field placeholder={'Email'}*/}
-                {/*       name={'email'}*/}
-                {/*       component={Input}*/}
-                {/*       validate={[required]}/>*/}
-                {createField("Email", "email", Input, [required])}
+            <Field placeholder={'Email'}
+                   name={'email'}
+                   component={Input}
+                   validate={[required]}/>
+            {/*{createField("Email", "email", Input, [required])}*/}
             <div>
                 <Field placeholder={'Password'}
                        name={'password'}
@@ -35,10 +37,10 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field component={Input} name={'rememberMe'} type={'checkbox'}/>Remember me
             </div>
             {props.error &&
-             <div className={s.formSummaryError}>
-                 {props.error}
-            </div> }
-             <div>
+            <div className={s.formSummaryError}>
+                {props.error}
+            </div>}
+            <div>
                 <button>Login</button>
             </div>
         </form>
@@ -57,7 +59,7 @@ const Login = (props: PropsType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Redirect to={'/profile/'}/>
     }
 
@@ -70,4 +72,13 @@ const Login = (props: PropsType) => {
 const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.data.isAuth
 })
+
+// const LoginFormikk = () => {
+//     return <div>
+//         <Formik>
+//
+//         </Formik>
+//     </div>
+// }
+
 export default connect(mapStateToProps, {login})(Login)

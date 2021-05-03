@@ -1,33 +1,28 @@
 import React, {useEffect, useState} from 'react'
-import {BrowserRouter, Link, NavLink, Route} from 'react-router-dom';
+import {BrowserRouter, Link, Route} from 'react-router-dom';
 import './App.css';
 import Music from './components/Music/Music';
-import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import {connect, useSelector} from 'react-redux';
+import {connect} from 'react-redux';
 import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/store";
 import Preloader from "./common/preloader/preloader";
 import 'antd/dist/antd.css'
 import {Layout, Menu} from 'antd';
 import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    UserOutlined,
-    TeamOutlined,
-    MailOutlined,
     LoadingOutlined,
+    MailOutlined,
+    PlaySquareOutlined,
     SettingOutlined,
-    PlaySquareOutlined
+    TeamOutlined,
+    UserOutlined
 } from '@ant-design/icons';
 import s from "./components/Navbar/Navbar.module.css";
-import Avatar from 'antd/lib/avatar/avatar';
-import { selectIsAuth } from './redux/auth-selectors';
-import Header from "./components/Header/Header";
+
 
 type PropsType = {
     initialized: boolean
@@ -37,7 +32,7 @@ type PropsType = {
 const DialogsContainer = React.lazy(() => import( './components/Dialogs/DialogsContainer'))
 const ProfileContainerAPI = React.lazy(() => import( './components/Profile/ProfileContainerAPI'))
 
-const { Sider, Content} = Layout;
+const {Sider, Content} = Layout;
 
 
 const App = (props: PropsType) => {
@@ -60,6 +55,7 @@ const App = (props: PropsType) => {
     return (
         <BrowserRouter>
             <Layout>
+
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     <div className="logo"/>
                     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
@@ -79,9 +75,12 @@ const App = (props: PropsType) => {
                             <Link to='/settings'>Settings</Link>
                         </Menu.Item>
                     </Menu>
+
                 </Sider>
+
+
                 <Layout className="site-layout">
-                    <HeaderContainer/>
+                    <div ><HeaderContainer/></div>
                     <Content
                         className="site-layout-background"
                         style={{
