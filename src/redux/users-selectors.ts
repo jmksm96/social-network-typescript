@@ -1,5 +1,6 @@
 import {AppStateType} from "./store";
 import {createSelector} from "reselect";
+import {UserProfileType} from "../Typing/typing";
 
  const getUsers = (state: AppStateType) => {
     return state.usersPage.users
@@ -37,4 +38,8 @@ export const getFollowingProgress = (state: AppStateType) => {
 
 export const getFollowingUsers = (state: AppStateType) => {
     return state.usersPage.followingUsers
+}
+
+export const getProfile = (state: AppStateType) => {
+     return state.profilePage.profile
 }

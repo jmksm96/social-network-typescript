@@ -29,11 +29,14 @@ export const Input: React.FC<any> = (props) => {
 }
 
 
-export const createField = (placeholder: string, name: string, component: React.FC, validate: any) =>
-    <div>
+export const createField = (type: string, placeholder: string, name: string, component: React.FC, validate: any) => {
+debugger
+    return <div>
         <Field
+            type={type}
             placeholder={placeholder}
             name={name}
             component={component}
             validate={validate}/>
     </div>
+}

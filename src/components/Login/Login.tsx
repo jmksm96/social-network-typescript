@@ -10,7 +10,8 @@ import {AppStateType} from "../../redux/store";
 import s from '../../common/forms-controls/FormsControls.module.css'
 
 
-type FormDataType = {
+
+export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean

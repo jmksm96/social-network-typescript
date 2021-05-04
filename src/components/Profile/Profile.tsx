@@ -10,6 +10,7 @@ type PropsType = {
     status: string
     isOwner: boolean
     savePhoto: (file: File) => void
+    saveProfile: (profile: UserProfileType) => void
 }
 const Profile: React.FC<PropsType> = (props) => {
     return (
@@ -19,6 +20,7 @@ const Profile: React.FC<PropsType> = (props) => {
                          updateStatus={props.updateStatus}
                          isOwner={props.isOwner}
                          savePhoto={props.savePhoto}
+                         saveProfile ={props.saveProfile}
             />
             <MyPostsContainer/>
         </div>

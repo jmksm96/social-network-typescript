@@ -12,6 +12,7 @@ type PropsTypeProfile = {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
+    saveProfile: (profile: UserProfileType) => void
     status: string
 }
 
@@ -43,30 +44,12 @@ const ProfileContainer: React.FC<PropsTypeProfile & RouteComponentProps<RouteTyp
                      profile={props.profile}
                      status={props.status}
                      updateStatus={props.updateStatus}
-                     savePhoto = {props.savePhoto}/>
+                     savePhoto = {props.savePhoto}
+                     saveProfile={props.saveProfile}/>
         </div>
     )
 }
 
 
-// class ProfileContainer extends React.Component<PropsTypeProfile & RouteComponentProps<RouteType>> {
-//     componentDidMount() {
-//         let userId = Number((this.props.match.params).userId);
-//         if (!userId) {
-//             userId = 2
-//         }
-//         this.props.getUserProfile(userId)
-//         this.props.getStatus(userId)
-//     }
-//
-//     render() {
-//         return (
-//             <div>
-//                 <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus = {this.props.updateStatus}/>
-//             </div>
-//         )
-//     }
-//
-// }
 
 export default ProfileContainer

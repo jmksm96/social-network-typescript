@@ -23,7 +23,6 @@ import {
 } from '@ant-design/icons';
 
 
-
 type PropsType = {
     initialized: boolean
     initializeApp: () => void
@@ -39,10 +38,6 @@ const App = (props: PropsType) => {
 
     const [collapsed, setCollapsed] = useState(false)
 
-    const toggle = () => {
-        setCollapsed(true)
-    }
-
     useEffect(() => {
         props.initializeApp()
     })
@@ -53,22 +48,8 @@ const App = (props: PropsType) => {
     }
 
 
-
     return (
         <BrowserRouter>
-            {/*<div>*/}
-            {/*    <div>H</div>*/}
-            {/*    <div>*/}
-            {/*        <div>LS</div>*/}
-            {/*        <div>CON</div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-            {/*<Layout>*/}
-            {/*    <Layout></Layout>*/}
-            {/*</Layout>*/}
-
-
             <Layout>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     <div className="logo"/>
@@ -90,13 +71,9 @@ const App = (props: PropsType) => {
                             <Link to='/settings'>Settings</Link>
                         </Menu.Item>
                     </Menu>
-
-
                 </Sider>
-
-
                 <Layout className="site-layout">
-
+                    <HeaderContainer/>
                     <Content
                         className="site-layout-background"
                         style={{
@@ -122,9 +99,67 @@ const App = (props: PropsType) => {
                         <Route path='/news' render={() => <News/>}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
+
                     </Content>
                 </Layout>
             </Layout>
+
+            {/*<Layout>*/}
+            {/*    <Sider trigger={null} collapsible collapsed={collapsed}>*/}
+            {/*        <div className="logo"/>*/}
+            {/*        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>*/}
+            {/*            <Menu.Item key="1" icon={<UserOutlined/>}>*/}
+            {/*                <Link to='/profile'>My Profile</Link>*/}
+            {/*            </Menu.Item>*/}
+
+            {/*            <Menu.Item key="2" icon={<TeamOutlined/>}>*/}
+            {/*                <Link to='/users'>Users</Link>*/}
+            {/*            </Menu.Item>*/}
+            {/*            <Menu.Item key="3" icon={<MailOutlined/>}>*/}
+            {/*                <Link to='/dialogs'>Messages</Link>*/}
+            {/*            </Menu.Item>*/}
+            {/*            <Menu.Item key="4" icon={<PlaySquareOutlined/>}>*/}
+            {/*                <Link to='/music'>Music</Link>*/}
+            {/*            </Menu.Item>*/}
+            {/*            <Menu.Item key="5" icon={<SettingOutlined/>}>*/}
+            {/*                <Link to='/settings'>Settings</Link>*/}
+            {/*            </Menu.Item>*/}
+            {/*        </Menu>*/}
+
+
+            {/*    </Sider>*/}
+
+
+            {/*    <Layout className="site-layout">*/}
+
+            {/*        <Content*/}
+            {/*            className="site-layout-background"*/}
+            {/*            style={{*/}
+            {/*                margin: '24px 16px',*/}
+            {/*                padding: 24,*/}
+            {/*                minHeight: 280,*/}
+            {/*            }}*/}
+            {/*        >*/}
+            {/*            <Route path='/dialogs' render={() => {*/}
+            {/*                return <React.Suspense fallback={<div><LoadingOutlined/></div>}>*/}
+            {/*                    <DialogsContainer/>*/}
+            {/*                </React.Suspense>*/}
+
+            {/*            }}/>*/}
+            {/*            <Route path='/profile/:userId?' exact render={() => {*/}
+            {/*                return <React.Suspense*/}
+            {/*                    fallback={<div><LoadingOutlined/></div>}>*/}
+            {/*                    <ProfileContainerAPI/>*/}
+            {/*                </React.Suspense>*/}
+            {/*            }}/>*/}
+            {/*            <Route path='/users' render={() => <UsersContainer/>}/>*/}
+            {/*            <Route path='/login' render={() => <Login/>}/>*/}
+            {/*            <Route path='/news' render={() => <News/>}/>*/}
+            {/*            <Route path='/music' render={() => <Music/>}/>*/}
+            {/*            <Route path='/settings' render={() => <Settings/>}/>*/}
+            {/*        </Content>*/}
+            {/*    </Layout>*/}
+            {/*</Layout>*/}
 
             {/*<div className='app-wrapper'>*/}
             {/*    <HeaderContainer/>*/}

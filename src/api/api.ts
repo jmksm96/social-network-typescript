@@ -1,4 +1,5 @@
 import axios from "axios";
+import {UserProfileType} from "../Typing/typing";
 
 const instance = axios.create({
     withCredentials: true,
@@ -6,7 +7,6 @@ const instance = axios.create({
     headers:
         {
             "API-KEY": "7c107b4d-cd0a-4372-844b-6a20a61a6e27",
-            // " Content-Type": 'multipart/form-data'
         }
 
 })
@@ -48,6 +48,9 @@ export const ProfileAPI = {
     updateStatus(status: string) {
         return instance.put(`profile/status/`, {status})
     },
+    saveProfile(profile: UserProfileType) {
+        return instance.put(`profile/`, profile)
+    },
     savePhoto(photoFile: File) {
         const formData = new FormData()
         formData.append("image", photoFile)
@@ -56,8 +59,7 @@ export const ProfileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(response => response.data)
-    },
-
+    }
 }
 
 export const authAPI = {
