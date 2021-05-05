@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './FormsControls.module.css'
 import {Field} from "redux-form";
-import Checkbox from "antd/lib/checkbox";
 
 
 export const FormControl: React.FC<any> = ({input, meta, child, ...props}) => {
@@ -25,12 +24,11 @@ export const Input: React.FC<any> = (props) => {
 
     const {input, meta, child, ...restProps} = props
     return <FormControl {...props} > <input {...input} {...restProps}/></FormControl>
-    // return <FormControl {...props} > <Checkbox {...input} {...restProps}>Checkbox</Checkbox></FormControl>
+
 }
 
 
 export const createField = (type: string, placeholder: string, name: string, component: React.FC, validate: any) => {
-debugger
     return <div>
         <Field
             type={type}

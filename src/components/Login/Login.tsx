@@ -1,14 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-// import {createField, Input} from '../../common/forms-controls/FormsControls';
 import {Input} from '../../common/forms-controls/FormsControls';
 import {login} from '../../redux/auth-reducer';
 import {required} from "../../utils/validators/validator";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/store";
 import s from '../../common/forms-controls/FormsControls.module.css'
-
 
 
 export type FormDataType = {
@@ -25,7 +23,6 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                    name={'email'}
                    component={Input}
                    validate={[required]}/>
-            {/*{createField("Email", "email", Input, [required])}*/}
             <div>
                 <Field placeholder={'Password'}
                        name={'password'}

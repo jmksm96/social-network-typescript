@@ -8,6 +8,7 @@ import {ProfileDataFormReduxForm} from './ProfileDataForm';
 import {Button} from 'antd';
 import {useSelector} from "react-redux";
 import {getProfile} from "../../../redux/users-selectors";
+import {cachedDataVersionTag} from "v8";
 
 
 type PropsType = {
@@ -34,7 +35,6 @@ const ProfileInfo = React.memo((props: PropsType) => {
     }
 
     const onSubmit = (formData: any) => {
-        debugger
         props.saveProfile(formData)
         setEditMode(false)
     }
@@ -52,7 +52,7 @@ const ProfileInfo = React.memo((props: PropsType) => {
                 {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
                 {editMode
-                    ? <ProfileDataFormReduxForm onSubmit={onSubmit}/>
+                    ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={props.profile}/>
                     : <ProfileData isOwner={props.isOwner} goToEditMode={goToEditMode}/>}
                 <div><b>Status:</b> <ProfileStatus status={props.status} updateStatus={props.updateStatus}/></div>
             </div>
@@ -79,17 +79,28 @@ const ProfileData = (props: ProfileDataT) => {
             <div>
                 <b>Looking for a job: </b>{profile.lookingForAJob ? "Yes" : "No"}
             </div>
+            <div>
+                <b>My professional skills: </b>{profile.lookingForAJobDescription}
+            </div>
         </div>
         <div>
-            <b>Contacts:</b>
-            {profile.contacts && Object.entries(profile.contacts).map(value => {
-                return value[1] && <div><a href={value[1]}>{value[0]}</a></div>
-            })}
+            <b>Contacts: </b>
+            {/*<b>Contacts:</b>*/}
+            {/*{profile.contacts && Object.entries(profile.contacts).map(value => {*/}
+            {/*    return value[1] && <div><a href={value[1]}>{value[0]}</a></div>*/}
+            {/*})}*/}
         </div>
     </div>
 }
 
+type ContactType = {
+    contactTitle: string
+    contactValue: any
+}
 
+export const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
+    return <div><b>{contactTitle}</b>: {contactValue}</div>
+}
 
 
 export default ProfileInfo;

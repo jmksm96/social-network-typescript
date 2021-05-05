@@ -3,11 +3,7 @@ import {createField, Input, Textarea} from "../../../common/forms-controls/Forms
 import {reduxForm} from "redux-form";
 import {useSelector} from "react-redux";
 import {getProfile} from "../../../redux/users-selectors";
-
-
-// type PropsType = {
-//     onSubmit: () => void
-// }
+import {Contact} from "./ProfileInfo";
 
 
 const ProfileDataForm = (props: any) => {
@@ -33,11 +29,17 @@ const ProfileDataForm = (props: any) => {
         </div>
 
         <div>
-            <b>Contacts</b>
-            Contacts:
-            {profile.contacts && Object.entries(profile.contacts).map(value => {
-                return value[1] && <div><a href={value[1]}>{value[0]}</a></div>
-            })}
+
+            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+            return <div className="contact">
+                <b>{key}: {createField(key, 'textarea', "contacts." + key, Input, [])} </b>
+            </div>
+        })}
+            {/*<b>Contacts</b>*/}
+            {/*Contacts:*/}
+            {/*{profile.contacts && Object.entries(profile.contacts).map(value => {*/}
+            {/*    return value[1] && <div><a href={value[1]}>{value[0]}</a></div>*/}
+            {/*})}*/}
         </div>
     </form>
 

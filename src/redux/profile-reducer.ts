@@ -1,5 +1,7 @@
 import {PhotosType, ProfilePageType, UserProfileType} from "../Typing/typing";
 import {ProfileAPI, UsersAPI} from "../api/api";
+import {AppStateType} from "./store";
+import {stopSubmit} from "redux-form";
 
 
 //START TYPE
@@ -151,13 +153,19 @@ export const savePhoto = (file: File) => async (dispatch: any) => {
         dispatch(savePhotoSuccess(response.data.photos))
     }
 }
+
+
+
 export const saveProfile = (profile: UserProfileType) => async (dispatch: any, getState: any) => {
+
    const userId = getState().auth.userId
 
     const response = await ProfileAPI.saveProfile(profile)
 
     if (response.data.resultCode === 0) {
        dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
     }
 }
 
