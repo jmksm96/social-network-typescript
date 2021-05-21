@@ -1,8 +1,7 @@
 import {AppStateType} from "./store";
 import {createSelector} from "reselect";
-import {UserProfileType} from "../Typing/typing";
 
- const getUsers = (state: AppStateType) => {
+const getUsers = (state: AppStateType) => {
     return state.usersPage.users
 }
 

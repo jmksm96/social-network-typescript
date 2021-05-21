@@ -1,46 +1,50 @@
-import React, {useState} from 'react';
+import React, {useCallback} from 'react';
 import {Link} from 'react-router-dom';
-import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from "@ant-design/icons";
+import {UserOutlined} from "@ant-design/icons";
 import Avatar from "antd/lib/avatar/avatar";
-import {Button, Layout} from "antd";
-import {useSelector} from "react-redux";
+import {Button, Col, Layout, Row} from "antd";
+import {useDispatch, useSelector} from "react-redux";
 import {getUserId, selectCurrentUserLogin, selectIsAuth} from '../../redux/auth-selectors';
+import {logout} from "../../redux/auth-reducer";
+import s from './Header.module.css'
 
 
-type HeaderPropsType = {
-    logout: () => void
-}
-
-
-const Header = (props: HeaderPropsType) => {
+const Header = () => {
     const isAuth = useSelector(selectIsAuth)
     const login = useSelector(selectCurrentUserLogin)
     const id = useSelector(getUserId)
+    const dispatch = useDispatch()
 
-    const {Header} = Layout;
-    const [collapsed, setCollapsed] = useState(false)
-    const toggle = () => {
-        setCollapsed(true)
-    }
+    const logoutHandler = useCallback(() => {
+        dispatch(logout());
+    }, []);
 
-    return <Header className="site-layout-background" style={{padding: 0}}>
-        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: 'trigger',
-            onClick: toggle,
-        })}
-        <div>
-            {isAuth
-                ? <Link to={'/profile/' + id}>
+    const {Header} = Layout
+
+    return ( <Header className = 'header'>
+        <div className={s.headerBlock}>
+            <Row>
+                <Col span={20}>
+
+                </Col>
+                {/*<Col span ={4}>*/}
                     <div>
-                        <Avatar icon={<UserOutlined/>}/>
-                        {login} - <Button onClick={props.logout}>Logout</Button>
+                        {isAuth
+                            ? <Link to={'/profile/' + id}>
+                                <div>
+                                    <span>  <Avatar icon={<UserOutlined/>}/> </span>
+                                    {login} - <Button onClick={logoutHandler}>Logout</Button>
+                                </div>
+                            </Link>
+                            : <Link to={'/login'}>Login</Link>}
                     </div>
-                </Link>
-                : <Link to={'/login'}>Login</Link>}
+                {/*</Col>*/}
+            </Row>
 
         </div>
 
     </Header>
+    )
 }
 
 export default Header;
